@@ -26,7 +26,7 @@
 		9057246F29CEFFB400335E45 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		9057247029CEFFD900335E45 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		9057247129CF000C00335E45 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		9057247429CF090200335E45 /* tests */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tests; sourceTree = "<group>"; };
+		9057247D29CF282C00335E45 /* testing */ = {isa = PBXFileReference; lastKnownFileType = folder; path = testing; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,7 +43,7 @@
 		9056F5332796C0C1001F641D = {
 			isa = PBXGroup;
 			children = (
-				9057247429CF090200335E45 /* tests */,
+				9057247D29CF282C00335E45 /* testing */,
 				9057247129CF000C00335E45 /* README.md */,
 				9057247029CEFFD900335E45 /* LICENSE */,
 				9057246F29CEFFB400335E45 /* .gitignore */,

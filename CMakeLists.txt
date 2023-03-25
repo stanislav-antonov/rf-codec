@@ -11,8 +11,8 @@ add_library(hamming_codes SHARED src/bit_array.c src/hamming_encode.c src/utils.
 include(CTest)
 
 add_test(tests ${CMAKE_CTEST_COMMAND}
-    --build-and-test "${CMAKE_SOURCE_DIR}/tests"
-                     "${CMAKE_BINARY_DIR}/tests"
+    --build-and-test "${CMAKE_SOURCE_DIR}/testing"
+                     "${CMAKE_BINARY_DIR}/testing"
     --build-generator ${CMAKE_GENERATOR}
     --build-makeprogram ${CMAKE_MAKE_PROGRAM}
     --build-project hamming_codes
