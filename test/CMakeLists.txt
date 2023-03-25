@@ -1,10 +1,10 @@
-add_executable(tests_executable
-    tests.c
-)
+set(TEST_EXE_NAME tests)
 
-target_link_libraries(tests_executable
+add_executable(${TEST_EXE_NAME} tests.c)
+
+target_link_libraries(${TEST_EXE_NAME}
     hamming_codes
     Unity
 )
 
-add_test(tests_suite tests_executable)
+add_test(NAME tests_suite COMMAND ${TEST_EXE_NAME})
