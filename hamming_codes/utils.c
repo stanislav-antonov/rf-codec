@@ -6,7 +6,7 @@
 //  Copyright © 2023 Sensory Ninja. All rights reserved.
 //
 
-#include "../include/utils.h"
+#include "utils.h"
 
 // https://stackoverflow.com/questions/12240299/convert-bytes-to-int-uint-in-c
 unsigned short utils_pack_byte_array(char* bytes, unsigned short* packed_bytes, unsigned short bytes_length) {

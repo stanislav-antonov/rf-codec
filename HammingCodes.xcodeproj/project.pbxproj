@@ -21,12 +21,13 @@
 /* Begin PBXFileReference section */
 		9056F53C2796C0C1001F641D /* HammingCodes */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HammingCodes; sourceTree = BUILT_PRODUCTS_DIR; };
 		9057245429CC3FED00335E45 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
-		9057246D29CE386000335E45 /* include */ = {isa = PBXFileReference; lastKnownFileType = folder; path = include; sourceTree = "<group>"; };
-		9057246E29CE388600335E45 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; path = src; sourceTree = "<group>"; };
 		9057246F29CEFFB400335E45 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		9057247029CEFFD900335E45 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		9057247129CF000C00335E45 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		9057247D29CF282C00335E45 /* testing */ = {isa = PBXFileReference; lastKnownFileType = folder; path = testing; sourceTree = "<group>"; };
+		9057247E29CF310B00335E45 /* test */ = {isa = PBXFileReference; lastKnownFileType = folder; path = test; sourceTree = "<group>"; };
+		9057247F29CF311800335E45 /* hamming_codes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = hamming_codes; sourceTree = "<group>"; };
+		9057248029CF315700335E45 /* external */ = {isa = PBXFileReference; lastKnownFileType = folder; path = external; sourceTree = "<group>"; };
+		9057248129CF37AA00335E45 /* .gitmodules */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitmodules; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,12 +44,13 @@
 		9056F5332796C0C1001F641D = {
 			isa = PBXGroup;
 			children = (
-				9057247D29CF282C00335E45 /* testing */,
+				9057248129CF37AA00335E45 /* .gitmodules */,
+				9057248029CF315700335E45 /* external */,
+				9057247F29CF311800335E45 /* hamming_codes */,
+				9057247E29CF310B00335E45 /* test */,
 				9057247129CF000C00335E45 /* README.md */,
 				9057247029CEFFD900335E45 /* LICENSE */,
 				9057246F29CEFFB400335E45 /* .gitignore */,
-				9057246E29CE388600335E45 /* src */,
-				9057246D29CE386000335E45 /* include */,
 				9057245429CC3FED00335E45 /* CMakeLists.txt */,
 				9056F53D2796C0C1001F641D /* Products */,
 			);

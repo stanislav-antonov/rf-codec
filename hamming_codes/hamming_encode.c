@@ -6,7 +6,7 @@
 //  Copyright © 2023 Sensory Ninja. All rights reserved.
 //
 
-#include "../include/hamming_encode.h"
+#include "hamming_encode.h"
 
 uint8_t calculate_parity_bit(uint16_t cw, uint8_t cw_length, uint16_t parity_bits_index_mask, uint8_t parity_bit_position) {
     uint8_t parity_bit = 0;

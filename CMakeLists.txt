@@ -1,21 +1,15 @@
-cmake_minimum_required(VERSION 3.1)
+project("Hamming Codes" C)
+cmake_minimum_required(VERSION 3.0)
 
-set(CMAKE_C_STANDARD 99)
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(TARGET_GROUP production CACHE STRING "Group to build")
 
-project(hamming_codes)
+add_subdirectory(hamming_codes)
 
-add_library(hamming_codes SHARED src/bit_array.c src/hamming_encode.c src/utils.c)
-
-include(CTest)
-
-add_test(tests ${CMAKE_CTEST_COMMAND}
-    --build-and-test "${CMAKE_SOURCE_DIR}/testing"
-                     "${CMAKE_BINARY_DIR}/testing"
-    --build-generator ${CMAKE_GENERATOR}
-    --build-makeprogram ${CMAKE_MAKE_PROGRAM}
-    --build-project hamming_codes
-    --test-command tests)
-
-
+if(TARGET_GROUP STREQUAL production)
+elseif(TARGET_GROUP STREQUAL test)
+    include(CTest)
+    add_subdirectory(external)
+    add_subdirectory(test)
+else()
+    message(FATAL_ERROR "Given TARGET_GROUP unknown")
+endif()

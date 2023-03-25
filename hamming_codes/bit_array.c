@@ -6,7 +6,7 @@
 //  Copyright © 2023 Sensory Ninja. All rights reserved.
 //
 
-#include "../include/bit_array.h"
+#include "bit_array.h"
 
 void bit_array_set_bit(uint16_t array[], uint8_t bit_index) {
     array[bit_index / 16] |= 1 << (bit_index % 16);
