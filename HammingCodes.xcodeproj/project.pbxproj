@@ -23,6 +23,9 @@
 		9057245429CC3FED00335E45 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		9057246D29CE386000335E45 /* include */ = {isa = PBXFileReference; lastKnownFileType = folder; path = include; sourceTree = "<group>"; };
 		9057246E29CE388600335E45 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; path = src; sourceTree = "<group>"; };
+		9057246F29CEFFB400335E45 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		9057247029CEFFD900335E45 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		9057247129CF000C00335E45 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +42,9 @@
 		9056F5332796C0C1001F641D = {
 			isa = PBXGroup;
 			children = (
+				9057247129CF000C00335E45 /* README.md */,
+				9057247029CEFFD900335E45 /* LICENSE */,
+				9057246F29CEFFB400335E45 /* .gitignore */,
 				9057246E29CE388600335E45 /* src */,
 				9057246D29CE386000335E45 /* include */,
 				9057245429CC3FED00335E45 /* CMakeLists.txt */,
