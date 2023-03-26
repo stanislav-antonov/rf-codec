@@ -89,7 +89,6 @@ void hamming_encode(char* data, uint16_t data_length, enum HammingDataWord dw_bi
     }
     
     for (uint8_t i = 0, j = 0; i < data_words_count; i++, j += 2) {
-        printf("cw: %hu\n", code_words[i]);
         uint16_t cw = code_words[i];
         
         uint8_t byte_1 = cw & 0xff;
