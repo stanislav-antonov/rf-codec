@@ -1,4 +1,4 @@
-# Hamming Codes
+# Hamming codec
 
 # How to run tests
 
