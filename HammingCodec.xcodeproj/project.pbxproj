@@ -136,7 +136,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 90079FB829D0D951002243D4 /* Build configuration list for PBXNativeTarget "HammingCodesTest" */;
 			buildPhases = (
-				90079FC329D0DFEA002243D4 /* ShellScript */,
+				90079FC329D0DFEA002243D4 /* Make and Compile */,
 				90079FAE29D0D951002243D4 /* Sources */,
 				90079FAF29D0D951002243D4 /* Frameworks */,
 				90079FB029D0D951002243D4 /* CopyFiles */,
@@ -203,7 +203,7 @@
 /* End PBXProject section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		90079FC329D0DFEA002243D4 /* ShellScript */ = {
+		90079FC329D0DFEA002243D4 /* Make and Compile */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -212,13 +212,14 @@
 			);
 			inputPaths = (
 			);
+			name = "Make and Compile";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncd build\ncmake -DTARGET_GROUP=test ..\nmake\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nmkdir build\ncd build\ncmake -DTARGET_GROUP=test ..\nmake\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
