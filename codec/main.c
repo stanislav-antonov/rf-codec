@@ -8,12 +8,12 @@ int main(int argc, const char * argv[]) {
     int n = 4;
     int size = 5;
     char data[] = { 0b10111011, 0b10111011, 0b10111011, 0b10111011, 0b10111011 };
-    char code_words[size * 3];
+    char encoded[size * 3];
     
-    hamming_encode(data, size, n, code_words);
+    hamming_encode(data, size, n, encoded);
     
     printf("data: %s\n", data);
-    printf("code words: %s\n", code_words);
+    printf("code words: %s\n", encoded);
     
     // char *cw = "0010111";
     // char *cw = "001011101111110";

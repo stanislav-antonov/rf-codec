@@ -46,7 +46,7 @@ struct HammingCodeWordParameters hamming_calculate_cw_parameters(enum HammingDat
 
 void hamming_encode(char* data, uint16_t data_length, enum HammingDataWord dw_bits_count, char* encoded) {
     uint16_t code_words[data_length];
-    uint16_t data_words[(data_length / 2) + 1];
+    uint16_t data_words[data_length];
     uint16_t data_words_count = utils_pack(data, data_length, data_words);
     
     struct HammingCodeWordParameters cw_parameters = hamming_calculate_cw_parameters(dw_bits_count);
@@ -88,7 +88,14 @@ void hamming_encode(char* data, uint16_t data_length, enum HammingDataWord dw_bi
         }
     }
     
-    for (int i = 0; i < data_length; i++) {
+    for (uint8_t i = 0, j = 0; i < data_words_count; i++, j += 2) {
         printf("cw: %hu\n", code_words[i]);
+        uint16_t cw = code_words[i];
+        
+        uint8_t byte_1 = cw & 0xff;
+        uint8_t byte_2 = ((cw >> 8) & 0xff);
+        
+        encoded[j] = byte_1;
+        encoded[j + 1] = byte_2;
     }
 }
