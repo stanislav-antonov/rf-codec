@@ -19,15 +19,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9056F53C2796C0C1001F641D /* HammingCodes */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HammingCodes; sourceTree = BUILT_PRODUCTS_DIR; };
+		9056F53C2796C0C1001F641D /* HammingCodec */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HammingCodec; sourceTree = BUILT_PRODUCTS_DIR; };
 		9057245429CC3FED00335E45 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		9057246F29CEFFB400335E45 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		9057247029CEFFD900335E45 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		9057247129CF000C00335E45 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		9057247E29CF310B00335E45 /* test */ = {isa = PBXFileReference; lastKnownFileType = folder; path = test; sourceTree = "<group>"; };
-		9057247F29CF311800335E45 /* hamming_codes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = hamming_codes; sourceTree = "<group>"; };
 		9057248029CF315700335E45 /* external */ = {isa = PBXFileReference; lastKnownFileType = folder; path = external; sourceTree = "<group>"; };
 		9057248129CF37AA00335E45 /* .gitmodules */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitmodules; sourceTree = "<group>"; };
+		9057248329D03A5900335E45 /* codec */ = {isa = PBXFileReference; lastKnownFileType = folder; path = codec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,9 +44,9 @@
 		9056F5332796C0C1001F641D = {
 			isa = PBXGroup;
 			children = (
+				9057248329D03A5900335E45 /* codec */,
 				9057248129CF37AA00335E45 /* .gitmodules */,
 				9057248029CF315700335E45 /* external */,
-				9057247F29CF311800335E45 /* hamming_codes */,
 				9057247E29CF310B00335E45 /* test */,
 				9057247129CF000C00335E45 /* README.md */,
 				9057247029CEFFD900335E45 /* LICENSE */,
@@ -59,7 +59,7 @@
 		9056F53D2796C0C1001F641D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9056F53C2796C0C1001F641D /* HammingCodes */,
+				9056F53C2796C0C1001F641D /* HammingCodec */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -67,9 +67,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9056F53B2796C0C1001F641D /* HammingCodes */ = {
+		9056F53B2796C0C1001F641D /* HammingCodec */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9056F5432796C0C1001F641D /* Build configuration list for PBXNativeTarget "HammingCodes" */;
+			buildConfigurationList = 9056F5432796C0C1001F641D /* Build configuration list for PBXNativeTarget "HammingCodec" */;
 			buildPhases = (
 				9056F5382796C0C1001F641D /* Sources */,
 				9056F5392796C0C1001F641D /* Frameworks */,
@@ -79,9 +79,9 @@
 			);
 			dependencies = (
 			);
-			name = HammingCodes;
+			name = HammingCodec;
 			productName = Playground;
-			productReference = 9056F53C2796C0C1001F641D /* HammingCodes */;
+			productReference = 9056F53C2796C0C1001F641D /* HammingCodec */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -98,7 +98,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9056F5372796C0C1001F641D /* Build configuration list for PBXProject "HammingCodes" */;
+			buildConfigurationList = 9056F5372796C0C1001F641D /* Build configuration list for PBXProject "HammingCodec" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -110,7 +110,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9056F53B2796C0C1001F641D /* HammingCodes */,
+				9056F53B2796C0C1001F641D /* HammingCodec */,
 			);
 		};
 /* End PBXProject section */
@@ -256,7 +256,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9056F5372796C0C1001F641D /* Build configuration list for PBXProject "HammingCodes" */ = {
+		9056F5372796C0C1001F641D /* Build configuration list for PBXProject "HammingCodec" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9056F5412796C0C1001F641D /* Debug */,
@@ -265,7 +265,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9056F5432796C0C1001F641D /* Build configuration list for PBXNativeTarget "HammingCodes" */ = {
+		9056F5432796C0C1001F641D /* Build configuration list for PBXNativeTarget "HammingCodec" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9056F5442796C0C1001F641D /* Debug */,

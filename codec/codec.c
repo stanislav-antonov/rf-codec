@@ -2,7 +2,7 @@
 //  Copyright © 2023 Sensory Ninja. All rights reserved.
 //
 
-#include "hamming_encode.h"
+#include "codec.h"
 
 uint8_t calculate_parity_bit(uint16_t cw, uint8_t cw_length, uint16_t parity_bits_index_mask, uint8_t parity_bit_position) {
     uint8_t parity_bit = 0;
@@ -44,15 +44,10 @@ struct HammingCodeWordParameters hamming_calculate_cw_parameters(enum HammingDat
     return parameters;
 }
 
-
-void hamming_encode(char* data, char* encoded, uint16_t data_length, enum HammingDataWord dw_bits_count) {
+void hamming_encode(char* data, uint16_t data_length, enum HammingDataWord dw_bits_count, char* encoded) {
     uint16_t code_words[data_length];
     uint16_t data_words[(data_length / 2) + 1];
     uint16_t data_words_count = utils_pack_byte_array(data, data_words, data_length);
-    
-    for (int i = 0; i < data_words_count; i++) {
-        printf("dw: %hu\n", data_words[i]);
-    }
     
     struct HammingCodeWordParameters cw_parameters = hamming_calculate_cw_parameters(dw_bits_count);
     
@@ -96,4 +91,8 @@ void hamming_encode(char* data, char* encoded, uint16_t data_length, enum Hammin
     for (int i = 0; i < data_length; i++) {
         printf("cw: %hu\n", code_words[i]);
     }
+}
+
+uint16_t hamming_decode(char* data, uint16_t data_length, enum HammingDataWord dw_bits_count, char* decoded) {
+    
 }

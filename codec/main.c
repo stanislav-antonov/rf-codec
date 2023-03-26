@@ -10,7 +10,7 @@ int main(int argc, const char * argv[]) {
     char data[] = { 0b10111011, 0b10111011, 0b10111011, 0b10111011, 0b10111011 };
     char code_words[size * 3];
     
-    hamming_encode(data, code_words, size, n);
+    hamming_encode(data, size, n, code_words);
     
     printf("data: %s\n", data);
     printf("code words: %s\n", code_words);

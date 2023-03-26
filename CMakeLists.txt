@@ -1,9 +1,9 @@
-project("Hamming Codes" C)
+project("Hamming Codec" C)
 cmake_minimum_required(VERSION 3.0)
 
 set(TARGET_GROUP production CACHE STRING "Group to build")
 
-add_subdirectory(hamming_codes)
+add_subdirectory(codec)
 
 if(TARGET_GROUP STREQUAL production)
 elseif(TARGET_GROUP STREQUAL test)
