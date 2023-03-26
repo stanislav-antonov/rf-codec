@@ -1,8 +1,4 @@
 //
-//  hamming_encode.c
-//  Playground
-//
-//  Created by Stanislav Antonov on 21/03/2023.
 //  Copyright © 2023 Sensory Ninja. All rights reserved.
 //
 
