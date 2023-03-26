@@ -10,6 +10,6 @@
 #include <stdint.h>
 #include <string.h>
 
-uint16_t utils_pack_byte_array(char* bytes, uint16_t* integers, uint16_t bytes_length);
+uint16_t utils_pack(char* data, uint16_t length, uint16_t* packed);
 
 #endif

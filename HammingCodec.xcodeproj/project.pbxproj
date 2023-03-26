@@ -6,8 +6,24 @@
 	objectVersion = 50;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		90A8474429D0B57300C88EDC /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 90A8474029D0B57300C88EDC /* main.c */; };
+		90A8474529D0B57300C88EDC /* codec.c in Sources */ = {isa = PBXBuildFile; fileRef = 90A8474129D0B57300C88EDC /* codec.c */; };
+		90A8474629D0B57300C88EDC /* bit_array.c in Sources */ = {isa = PBXBuildFile; fileRef = 90A8474229D0B57300C88EDC /* bit_array.c */; };
+		90A8474729D0B57300C88EDC /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = 90A8474329D0B57300C88EDC /* utils.c */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXCopyFilesBuildPhase section */
-		9056F53A2796C0C1001F641D /* CopyFiles */ = {
+		90079FB029D0D951002243D4 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		90A8473029D0B4E400C88EDC /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -19,19 +35,35 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9056F53C2796C0C1001F641D /* HammingCodec */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HammingCodec; sourceTree = BUILT_PRODUCTS_DIR; };
-		9057245429CC3FED00335E45 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
-		9057246F29CEFFB400335E45 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		9057247029CEFFD900335E45 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		9057247129CF000C00335E45 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		9057247E29CF310B00335E45 /* test */ = {isa = PBXFileReference; lastKnownFileType = folder; path = test; sourceTree = "<group>"; };
-		9057248029CF315700335E45 /* external */ = {isa = PBXFileReference; lastKnownFileType = folder; path = external; sourceTree = "<group>"; };
-		9057248129CF37AA00335E45 /* .gitmodules */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitmodules; sourceTree = "<group>"; };
-		9057248329D03A5900335E45 /* codec */ = {isa = PBXFileReference; lastKnownFileType = folder; path = codec; sourceTree = "<group>"; };
+		90079F9D29D0C6E1002243D4 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CMakeLists.txt; path = test/CMakeLists.txt; sourceTree = "<group>"; };
+		90079F9E29D0C734002243D4 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		90079F9F29D0C734002243D4 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		90079FA029D0C734002243D4 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		90079FA729D0D146002243D4 /* unity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = unity.h; path = external/Unity/src/unity.h; sourceTree = "<group>"; };
+		90079FA829D0D146002243D4 /* unity.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = unity.c; path = external/Unity/src/unity.c; sourceTree = "<group>"; };
+		90079FA929D0D146002243D4 /* unity_internals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = unity_internals.h; path = external/Unity/src/unity_internals.h; sourceTree = "<group>"; };
+		90079FB229D0D951002243D4 /* HammingCodesTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HammingCodesTest; sourceTree = BUILT_PRODUCTS_DIR; };
+		90A8473229D0B4E400C88EDC /* HammingCodec */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HammingCodec; sourceTree = BUILT_PRODUCTS_DIR; };
+		90A8473C29D0B57200C88EDC /* bit_array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bit_array.h; path = codec/bit_array.h; sourceTree = "<group>"; };
+		90A8473D29D0B57200C88EDC /* codec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = codec.h; path = codec/codec.h; sourceTree = "<group>"; };
+		90A8473E29D0B57300C88EDC /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = utils.h; path = codec/utils.h; sourceTree = "<group>"; };
+		90A8473F29D0B57300C88EDC /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CMakeLists.txt; path = codec/CMakeLists.txt; sourceTree = "<group>"; };
+		90A8474029D0B57300C88EDC /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = codec/main.c; sourceTree = "<group>"; };
+		90A8474129D0B57300C88EDC /* codec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = codec.c; path = codec/codec.c; sourceTree = "<group>"; };
+		90A8474229D0B57300C88EDC /* bit_array.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bit_array.c; path = codec/bit_array.c; sourceTree = "<group>"; };
+		90A8474329D0B57300C88EDC /* utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = utils.c; path = codec/utils.c; sourceTree = "<group>"; };
+		90A8475729D0BFD000C88EDC /* tests.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tests.c; path = test/tests.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		9056F5392796C0C1001F641D /* Frameworks */ = {
+		90079FAF29D0D951002243D4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		90A8472F29D0B4E400C88EDC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -41,92 +73,194 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9056F5332796C0C1001F641D = {
+		90A8472929D0B4E400C88EDC = {
 			isa = PBXGroup;
 			children = (
-				9057248329D03A5900335E45 /* codec */,
-				9057248129CF37AA00335E45 /* .gitmodules */,
-				9057248029CF315700335E45 /* external */,
-				9057247E29CF310B00335E45 /* test */,
-				9057247129CF000C00335E45 /* README.md */,
-				9057247029CEFFD900335E45 /* LICENSE */,
-				9057246F29CEFFB400335E45 /* .gitignore */,
-				9057245429CC3FED00335E45 /* CMakeLists.txt */,
-				9056F53D2796C0C1001F641D /* Products */,
+				90079FA029D0C734002243D4 /* CMakeLists.txt */,
+				90079F9E29D0C734002243D4 /* LICENSE */,
+				90079F9F29D0C734002243D4 /* README.md */,
+				90A8475929D0BFDE00C88EDC /* external */,
+				90A8475629D0BFA000C88EDC /* test */,
+				90A8474829D0BB4D00C88EDC /* codec */,
+				90A8473329D0B4E400C88EDC /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		9056F53D2796C0C1001F641D /* Products */ = {
+		90A8473329D0B4E400C88EDC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9056F53C2796C0C1001F641D /* HammingCodec */,
+				90A8473229D0B4E400C88EDC /* HammingCodec */,
+				90079FB229D0D951002243D4 /* HammingCodesTest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		90A8474829D0BB4D00C88EDC /* codec */ = {
+			isa = PBXGroup;
+			children = (
+				90A8474229D0B57300C88EDC /* bit_array.c */,
+				90A8473C29D0B57200C88EDC /* bit_array.h */,
+				90A8473F29D0B57300C88EDC /* CMakeLists.txt */,
+				90A8474129D0B57300C88EDC /* codec.c */,
+				90A8473D29D0B57200C88EDC /* codec.h */,
+				90A8474029D0B57300C88EDC /* main.c */,
+				90A8474329D0B57300C88EDC /* utils.c */,
+				90A8473E29D0B57300C88EDC /* utils.h */,
+			);
+			name = codec;
+			sourceTree = "<group>";
+		};
+		90A8475629D0BFA000C88EDC /* test */ = {
+			isa = PBXGroup;
+			children = (
+				90079F9D29D0C6E1002243D4 /* CMakeLists.txt */,
+				90A8475729D0BFD000C88EDC /* tests.c */,
+			);
+			name = test;
+			sourceTree = "<group>";
+		};
+		90A8475929D0BFDE00C88EDC /* external */ = {
+			isa = PBXGroup;
+			children = (
+				90079FA929D0D146002243D4 /* unity_internals.h */,
+				90079FA829D0D146002243D4 /* unity.c */,
+				90079FA729D0D146002243D4 /* unity.h */,
+			);
+			name = external;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9056F53B2796C0C1001F641D /* HammingCodec */ = {
+		90079FB129D0D951002243D4 /* HammingCodesTest */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9056F5432796C0C1001F641D /* Build configuration list for PBXNativeTarget "HammingCodec" */;
+			buildConfigurationList = 90079FB829D0D951002243D4 /* Build configuration list for PBXNativeTarget "HammingCodesTest" */;
 			buildPhases = (
-				9056F5382796C0C1001F641D /* Sources */,
-				9056F5392796C0C1001F641D /* Frameworks */,
-				9056F53A2796C0C1001F641D /* CopyFiles */,
+				90079FC329D0DFEA002243D4 /* ShellScript */,
+				90079FAE29D0D951002243D4 /* Sources */,
+				90079FAF29D0D951002243D4 /* Frameworks */,
+				90079FB029D0D951002243D4 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HammingCodesTest;
+			productName = HammingCodesTest1;
+			productReference = 90079FB229D0D951002243D4 /* HammingCodesTest */;
+			productType = "com.apple.product-type.tool";
+		};
+		90A8473129D0B4E400C88EDC /* HammingCodec */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 90A8473929D0B4E400C88EDC /* Build configuration list for PBXNativeTarget "HammingCodec" */;
+			buildPhases = (
+				90A8472E29D0B4E400C88EDC /* Sources */,
+				90A8472F29D0B4E400C88EDC /* Frameworks */,
+				90A8473029D0B4E400C88EDC /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = HammingCodec;
-			productName = Playground;
-			productReference = 9056F53C2796C0C1001F641D /* HammingCodec */;
+			productName = HammingCodec;
+			productReference = 90A8473229D0B4E400C88EDC /* HammingCodec */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		9056F5342796C0C1001F641D /* Project object */ = {
+		90A8472A29D0B4E400C88EDC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Sensory Ninja";
 				TargetAttributes = {
-					9056F53B2796C0C1001F641D = {
+					90079FB129D0D951002243D4 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					90A8473129D0B4E400C88EDC = {
 						CreatedOnToolsVersion = 10.1;
 					};
 				};
 			};
-			buildConfigurationList = 9056F5372796C0C1001F641D /* Build configuration list for PBXProject "HammingCodec" */;
+			buildConfigurationList = 90A8472D29D0B4E400C88EDC /* Build configuration list for PBXProject "HammingCodec" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 9056F5332796C0C1001F641D;
-			productRefGroup = 9056F53D2796C0C1001F641D /* Products */;
+			mainGroup = 90A8472929D0B4E400C88EDC;
+			productRefGroup = 90A8473329D0B4E400C88EDC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9056F53B2796C0C1001F641D /* HammingCodec */,
+				90A8473129D0B4E400C88EDC /* HammingCodec */,
+				90079FB129D0D951002243D4 /* HammingCodesTest */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		90079FC329D0DFEA002243D4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncd build\ncmake -DTARGET_GROUP=test ..\nmake\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		9056F5382796C0C1001F641D /* Sources */ = {
+		90079FAE29D0D951002243D4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		90A8472E29D0B4E400C88EDC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				90A8474529D0B57300C88EDC /* codec.c in Sources */,
+				90A8474729D0B57300C88EDC /* utils.c in Sources */,
+				90A8474629D0B57300C88EDC /* bit_array.c in Sources */,
+				90A8474429D0B57300C88EDC /* main.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		9056F5412796C0C1001F641D /* Debug */ = {
+		90079FB629D0D951002243D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		90079FB729D0D951002243D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		90A8473729D0B4E400C88EDC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -182,10 +316,11 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Debug;
 		};
-		9056F5422796C0C1001F641D /* Release */ = {
+		90A8473829D0B4E400C88EDC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -234,10 +369,11 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
+				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Release;
 		};
-		9056F5442796C0C1001F641D /* Debug */ = {
+		90A8473A29D0B4E400C88EDC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -245,7 +381,7 @@
 			};
 			name = Debug;
 		};
-		9056F5452796C0C1001F641D /* Release */ = {
+		90A8473B29D0B4E400C88EDC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -256,25 +392,34 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9056F5372796C0C1001F641D /* Build configuration list for PBXProject "HammingCodec" */ = {
+		90079FB829D0D951002243D4 /* Build configuration list for PBXNativeTarget "HammingCodesTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9056F5412796C0C1001F641D /* Debug */,
-				9056F5422796C0C1001F641D /* Release */,
+				90079FB629D0D951002243D4 /* Debug */,
+				90079FB729D0D951002243D4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9056F5432796C0C1001F641D /* Build configuration list for PBXNativeTarget "HammingCodec" */ = {
+		90A8472D29D0B4E400C88EDC /* Build configuration list for PBXProject "HammingCodec" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9056F5442796C0C1001F641D /* Debug */,
-				9056F5452796C0C1001F641D /* Release */,
+				90A8473729D0B4E400C88EDC /* Debug */,
+				90A8473829D0B4E400C88EDC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		90A8473929D0B4E400C88EDC /* Build configuration list for PBXNativeTarget "HammingCodec" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				90A8473A29D0B4E400C88EDC /* Debug */,
+				90A8473B29D0B4E400C88EDC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 9056F5342796C0C1001F641D /* Project object */;
+	rootObject = 90A8472A29D0B4E400C88EDC /* Project object */;
 }
