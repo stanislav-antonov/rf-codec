@@ -19,8 +19,8 @@ enum HammingDataWord {
 };
 
 struct HammingCodeWordParameters {
-    uint8_t codeword_length;
-    uint8_t parity_bits_number;
+    uint8_t total_bits_count;
+    uint8_t parity_bits_count;
     uint16_t parity_bits_index_mask;
 };
 

@@ -12,4 +12,6 @@
 
 uint16_t utils_pack(char* data, uint16_t length, uint16_t* packed);
 
+uint16_t utils_unpack(uint16_t* data, uint16_t length, char* unpacked);
+
 #endif
