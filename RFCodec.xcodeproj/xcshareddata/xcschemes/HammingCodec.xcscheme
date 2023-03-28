@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "90079FB129D0D951002243D4"
-               BuildableName = "RFCodecTest"
-               BlueprintName = "RFCodecTest"
+               BlueprintIdentifier = "90A8473129D0B4E400C88EDC"
+               BuildableName = "RFCodec"
+               BlueprintName = "RFCodec"
                ReferencedContainer = "container:RFCodec.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "90079FB129D0D951002243D4"
-            BuildableName = "RFCodecTest"
-            BlueprintName = "RFCodecTest"
+            BlueprintIdentifier = "90A8473129D0B4E400C88EDC"
+            BuildableName = "RFCodec"
+            BlueprintName = "RFCodec"
             ReferencedContainer = "container:RFCodec.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -55,9 +55,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "90079FB129D0D951002243D4"
-            BuildableName = "RFCodecTest"
-            BlueprintName = "RFCodecTest"
+            BlueprintIdentifier = "90A8473129D0B4E400C88EDC"
+            BuildableName = "RFCodec"
+            BlueprintName = "RFCodec"
             ReferencedContainer = "container:RFCodec.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -74,9 +74,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "90079FB129D0D951002243D4"
-            BuildableName = "RFCodecTest"
-            BlueprintName = "RFCodecTest"
+            BlueprintIdentifier = "90A8473129D0B4E400C88EDC"
+            BuildableName = "RFCodec"
+            BlueprintName = "RFCodec"
             ReferencedContainer = "container:RFCodec.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

@@ -12,6 +12,18 @@
 		90079FCE29D310FF002243D4 /* bit_array.c in Sources */ = {isa = PBXBuildFile; fileRef = 90079FC829D310FF002243D4 /* bit_array.c */; };
 		90079FCF29D310FF002243D4 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 90079FCB29D310FF002243D4 /* main.c */; };
 		90079FD229D314EB002243D4 /* ccitt_whitening.c in Sources */ = {isa = PBXBuildFile; fileRef = 90079FD029D314EB002243D4 /* ccitt_whitening.c */; };
+		90079FD329D362EE002243D4 /* unity_internals.h in Sources */ = {isa = PBXBuildFile; fileRef = 90079FA929D0D146002243D4 /* unity_internals.h */; };
+		90079FD429D362EE002243D4 /* unity.c in Sources */ = {isa = PBXBuildFile; fileRef = 90079FA829D0D146002243D4 /* unity.c */; };
+		90079FD529D362EE002243D4 /* unity.h in Sources */ = {isa = PBXBuildFile; fileRef = 90079FA729D0D146002243D4 /* unity.h */; };
+		90079FD629D362EE002243D4 /* tests.c in Sources */ = {isa = PBXBuildFile; fileRef = 90A8475729D0BFD000C88EDC /* tests.c */; };
+		90079FD729D362EE002243D4 /* bit_array.c in Sources */ = {isa = PBXBuildFile; fileRef = 90079FC829D310FF002243D4 /* bit_array.c */; };
+		90079FD829D362EE002243D4 /* bit_array.h in Sources */ = {isa = PBXBuildFile; fileRef = 90079FC429D310FF002243D4 /* bit_array.h */; };
+		90079FD929D362EE002243D4 /* hamming_codec.c in Sources */ = {isa = PBXBuildFile; fileRef = 90079FC629D310FF002243D4 /* hamming_codec.c */; };
+		90079FDA29D362EE002243D4 /* hamming_codec.h in Sources */ = {isa = PBXBuildFile; fileRef = 90079FC929D310FF002243D4 /* hamming_codec.h */; };
+		90079FDB29D362EE002243D4 /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = 90079FC529D310FF002243D4 /* utils.c */; };
+		90079FDC29D362EE002243D4 /* utils.h in Sources */ = {isa = PBXBuildFile; fileRef = 90079FC729D310FF002243D4 /* utils.h */; };
+		90079FDD29D362EE002243D4 /* ccitt_whitening.c in Sources */ = {isa = PBXBuildFile; fileRef = 90079FD029D314EB002243D4 /* ccitt_whitening.c */; };
+		90079FDE29D362EE002243D4 /* ccitt_whitening.h in Sources */ = {isa = PBXBuildFile; fileRef = 90079FD129D314EB002243D4 /* ccitt_whitening.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -141,7 +153,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 90079FB829D0D951002243D4 /* Build configuration list for PBXNativeTarget "RFCodecTest" */;
 			buildPhases = (
-				90079FC329D0DFEA002243D4 /* Make and Compile */,
 				90079FAE29D0D951002243D4 /* Sources */,
 				90079FAF29D0D951002243D4 /* Frameworks */,
 				90079FB029D0D951002243D4 /* CopyFiles */,
@@ -207,32 +218,23 @@
 		};
 /* End PBXProject section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		90079FC329D0DFEA002243D4 /* Make and Compile */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Make and Compile";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nmkdir build\ncd build\ncmake -DTARGET_GROUP=test ..\nmake\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		90079FAE29D0D951002243D4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90079FD329D362EE002243D4 /* unity_internals.h in Sources */,
+				90079FD429D362EE002243D4 /* unity.c in Sources */,
+				90079FD529D362EE002243D4 /* unity.h in Sources */,
+				90079FD629D362EE002243D4 /* tests.c in Sources */,
+				90079FD729D362EE002243D4 /* bit_array.c in Sources */,
+				90079FD829D362EE002243D4 /* bit_array.h in Sources */,
+				90079FD929D362EE002243D4 /* hamming_codec.c in Sources */,
+				90079FDA29D362EE002243D4 /* hamming_codec.h in Sources */,
+				90079FDB29D362EE002243D4 /* utils.c in Sources */,
+				90079FDC29D362EE002243D4 /* utils.h in Sources */,
+				90079FDD29D362EE002243D4 /* ccitt_whitening.c in Sources */,
+				90079FDE29D362EE002243D4 /* ccitt_whitening.h in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
