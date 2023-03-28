@@ -42,7 +42,7 @@
 		90079FA729D0D146002243D4 /* unity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = unity.h; path = external/Unity/src/unity.h; sourceTree = "<group>"; };
 		90079FA829D0D146002243D4 /* unity.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = unity.c; path = external/Unity/src/unity.c; sourceTree = "<group>"; };
 		90079FA929D0D146002243D4 /* unity_internals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = unity_internals.h; path = external/Unity/src/unity_internals.h; sourceTree = "<group>"; };
-		90079FB229D0D951002243D4 /* HammingCodesTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HammingCodesTest; sourceTree = BUILT_PRODUCTS_DIR; };
+		90079FB229D0D951002243D4 /* RFCodecTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RFCodecTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		90079FC429D310FF002243D4 /* bit_array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bit_array.h; path = rf_codec/bit_array.h; sourceTree = "<group>"; };
 		90079FC529D310FF002243D4 /* utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = utils.c; path = rf_codec/utils.c; sourceTree = "<group>"; };
 		90079FC629D310FF002243D4 /* hamming_codec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = hamming_codec.c; path = rf_codec/hamming_codec.c; sourceTree = "<group>"; };
@@ -51,7 +51,7 @@
 		90079FC929D310FF002243D4 /* hamming_codec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hamming_codec.h; path = rf_codec/hamming_codec.h; sourceTree = "<group>"; };
 		90079FCA29D310FF002243D4 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CMakeLists.txt; path = rf_codec/CMakeLists.txt; sourceTree = "<group>"; };
 		90079FCB29D310FF002243D4 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = rf_codec/main.c; sourceTree = "<group>"; };
-		90A8473229D0B4E400C88EDC /* HammingCodec */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HammingCodec; sourceTree = BUILT_PRODUCTS_DIR; };
+		90A8473229D0B4E400C88EDC /* RFCodec */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RFCodec; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A8475729D0BFD000C88EDC /* tests.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tests.c; path = test/tests.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,8 +89,8 @@
 		90A8473329D0B4E400C88EDC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				90A8473229D0B4E400C88EDC /* HammingCodec */,
-				90079FB229D0D951002243D4 /* HammingCodesTest */,
+				90A8473229D0B4E400C88EDC /* RFCodec */,
+				90079FB229D0D951002243D4 /* RFCodecTest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -132,9 +132,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		90079FB129D0D951002243D4 /* HammingCodesTest */ = {
+		90079FB129D0D951002243D4 /* RFCodecTest */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 90079FB829D0D951002243D4 /* Build configuration list for PBXNativeTarget "HammingCodesTest" */;
+			buildConfigurationList = 90079FB829D0D951002243D4 /* Build configuration list for PBXNativeTarget "RFCodecTest" */;
 			buildPhases = (
 				90079FC329D0DFEA002243D4 /* Make and Compile */,
 				90079FAE29D0D951002243D4 /* Sources */,
@@ -145,14 +145,14 @@
 			);
 			dependencies = (
 			);
-			name = HammingCodesTest;
+			name = RFCodecTest;
 			productName = HammingCodesTest1;
-			productReference = 90079FB229D0D951002243D4 /* HammingCodesTest */;
+			productReference = 90079FB229D0D951002243D4 /* RFCodecTest */;
 			productType = "com.apple.product-type.tool";
 		};
-		90A8473129D0B4E400C88EDC /* HammingCodec */ = {
+		90A8473129D0B4E400C88EDC /* RFCodec */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 90A8473929D0B4E400C88EDC /* Build configuration list for PBXNativeTarget "HammingCodec" */;
+			buildConfigurationList = 90A8473929D0B4E400C88EDC /* Build configuration list for PBXNativeTarget "RFCodec" */;
 			buildPhases = (
 				90A8472E29D0B4E400C88EDC /* Sources */,
 				90A8472F29D0B4E400C88EDC /* Frameworks */,
@@ -162,9 +162,9 @@
 			);
 			dependencies = (
 			);
-			name = HammingCodec;
+			name = RFCodec;
 			productName = HammingCodec;
-			productReference = 90A8473229D0B4E400C88EDC /* HammingCodec */;
+			productReference = 90A8473229D0B4E400C88EDC /* RFCodec */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -196,8 +196,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				90A8473129D0B4E400C88EDC /* HammingCodec */,
-				90079FB129D0D951002243D4 /* HammingCodesTest */,
+				90A8473129D0B4E400C88EDC /* RFCodec */,
+				90079FB129D0D951002243D4 /* RFCodecTest */,
 			);
 		};
 /* End PBXProject section */
@@ -393,7 +393,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		90079FB829D0D951002243D4 /* Build configuration list for PBXNativeTarget "HammingCodesTest" */ = {
+		90079FB829D0D951002243D4 /* Build configuration list for PBXNativeTarget "RFCodecTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				90079FB629D0D951002243D4 /* Debug */,
@@ -411,7 +411,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		90A8473929D0B4E400C88EDC /* Build configuration list for PBXNativeTarget "HammingCodec" */ = {
+		90A8473929D0B4E400C88EDC /* Build configuration list for PBXNativeTarget "RFCodec" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				90A8473A29D0B4E400C88EDC /* Debug */,

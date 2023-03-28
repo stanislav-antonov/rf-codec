@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "90079FB129D0D951002243D4"
-               BuildableName = "HammingCodesTest"
-               BlueprintName = "HammingCodesTest"
+               BuildableName = "RFCodecTest"
+               BlueprintName = "RFCodecTest"
                ReferencedContainer = "container:RFCodec.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "90079FB129D0D951002243D4"
-            BuildableName = "HammingCodesTest"
-            BlueprintName = "HammingCodesTest"
+            BuildableName = "RFCodecTest"
+            BlueprintName = "RFCodecTest"
             ReferencedContainer = "container:RFCodec.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -59,8 +59,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "90079FB129D0D951002243D4"
-            BuildableName = "HammingCodesTest"
-            BlueprintName = "HammingCodesTest"
+            BuildableName = "RFCodecTest"
+            BlueprintName = "RFCodecTest"
             ReferencedContainer = "container:RFCodec.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -78,8 +78,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "90079FB129D0D951002243D4"
-            BuildableName = "HammingCodesTest"
-            BlueprintName = "HammingCodesTest"
+            BuildableName = "RFCodecTest"
+            BlueprintName = "RFCodecTest"
             ReferencedContainer = "container:RFCodec.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
