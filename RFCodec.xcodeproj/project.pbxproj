@@ -11,6 +11,7 @@
 		90079FCD29D310FF002243D4 /* hamming_codec.c in Sources */ = {isa = PBXBuildFile; fileRef = 90079FC629D310FF002243D4 /* hamming_codec.c */; };
 		90079FCE29D310FF002243D4 /* bit_array.c in Sources */ = {isa = PBXBuildFile; fileRef = 90079FC829D310FF002243D4 /* bit_array.c */; };
 		90079FCF29D310FF002243D4 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 90079FCB29D310FF002243D4 /* main.c */; };
+		90079FD229D314EB002243D4 /* ccitt_whitening.c in Sources */ = {isa = PBXBuildFile; fileRef = 90079FD029D314EB002243D4 /* ccitt_whitening.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -51,6 +52,8 @@
 		90079FC929D310FF002243D4 /* hamming_codec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hamming_codec.h; path = rf_codec/hamming_codec.h; sourceTree = "<group>"; };
 		90079FCA29D310FF002243D4 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CMakeLists.txt; path = rf_codec/CMakeLists.txt; sourceTree = "<group>"; };
 		90079FCB29D310FF002243D4 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = rf_codec/main.c; sourceTree = "<group>"; };
+		90079FD029D314EB002243D4 /* ccitt_whitening.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = ccitt_whitening.c; path = rf_codec/ccitt_whitening.c; sourceTree = "<group>"; };
+		90079FD129D314EB002243D4 /* ccitt_whitening.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ccitt_whitening.h; path = rf_codec/ccitt_whitening.h; sourceTree = "<group>"; };
 		90A8473229D0B4E400C88EDC /* RFCodec */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RFCodec; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A8475729D0BFD000C88EDC /* tests.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tests.c; path = test/tests.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,6 +109,8 @@
 				90079FCB29D310FF002243D4 /* main.c */,
 				90079FC529D310FF002243D4 /* utils.c */,
 				90079FC729D310FF002243D4 /* utils.h */,
+				90079FD029D314EB002243D4 /* ccitt_whitening.c */,
+				90079FD129D314EB002243D4 /* ccitt_whitening.h */,
 			);
 			name = rf_codec;
 			sourceTree = "<group>";
@@ -238,6 +243,7 @@
 				90079FCF29D310FF002243D4 /* main.c in Sources */,
 				90079FCD29D310FF002243D4 /* hamming_codec.c in Sources */,
 				90079FCE29D310FF002243D4 /* bit_array.c in Sources */,
+				90079FD229D314EB002243D4 /* ccitt_whitening.c in Sources */,
 				90079FCC29D310FF002243D4 /* utils.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
