@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
-#include "codec.h"
+#include "hamming_codec.h"
 
 int main(int argc, const char * argv[]) {
     int n = 4;

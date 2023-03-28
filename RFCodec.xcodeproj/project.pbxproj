@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		90A8474429D0B57300C88EDC /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 90A8474029D0B57300C88EDC /* main.c */; };
-		90A8474529D0B57300C88EDC /* codec.c in Sources */ = {isa = PBXBuildFile; fileRef = 90A8474129D0B57300C88EDC /* codec.c */; };
-		90A8474629D0B57300C88EDC /* bit_array.c in Sources */ = {isa = PBXBuildFile; fileRef = 90A8474229D0B57300C88EDC /* bit_array.c */; };
-		90A8474729D0B57300C88EDC /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = 90A8474329D0B57300C88EDC /* utils.c */; };
+		90079FCC29D310FF002243D4 /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = 90079FC529D310FF002243D4 /* utils.c */; };
+		90079FCD29D310FF002243D4 /* hamming_codec.c in Sources */ = {isa = PBXBuildFile; fileRef = 90079FC629D310FF002243D4 /* hamming_codec.c */; };
+		90079FCE29D310FF002243D4 /* bit_array.c in Sources */ = {isa = PBXBuildFile; fileRef = 90079FC829D310FF002243D4 /* bit_array.c */; };
+		90079FCF29D310FF002243D4 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 90079FCB29D310FF002243D4 /* main.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,15 +43,15 @@
 		90079FA829D0D146002243D4 /* unity.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = unity.c; path = external/Unity/src/unity.c; sourceTree = "<group>"; };
 		90079FA929D0D146002243D4 /* unity_internals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = unity_internals.h; path = external/Unity/src/unity_internals.h; sourceTree = "<group>"; };
 		90079FB229D0D951002243D4 /* HammingCodesTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HammingCodesTest; sourceTree = BUILT_PRODUCTS_DIR; };
+		90079FC429D310FF002243D4 /* bit_array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bit_array.h; path = rf_codec/bit_array.h; sourceTree = "<group>"; };
+		90079FC529D310FF002243D4 /* utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = utils.c; path = rf_codec/utils.c; sourceTree = "<group>"; };
+		90079FC629D310FF002243D4 /* hamming_codec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = hamming_codec.c; path = rf_codec/hamming_codec.c; sourceTree = "<group>"; };
+		90079FC729D310FF002243D4 /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = utils.h; path = rf_codec/utils.h; sourceTree = "<group>"; };
+		90079FC829D310FF002243D4 /* bit_array.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bit_array.c; path = rf_codec/bit_array.c; sourceTree = "<group>"; };
+		90079FC929D310FF002243D4 /* hamming_codec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hamming_codec.h; path = rf_codec/hamming_codec.h; sourceTree = "<group>"; };
+		90079FCA29D310FF002243D4 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CMakeLists.txt; path = rf_codec/CMakeLists.txt; sourceTree = "<group>"; };
+		90079FCB29D310FF002243D4 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = rf_codec/main.c; sourceTree = "<group>"; };
 		90A8473229D0B4E400C88EDC /* HammingCodec */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HammingCodec; sourceTree = BUILT_PRODUCTS_DIR; };
-		90A8473C29D0B57200C88EDC /* bit_array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bit_array.h; path = codec/bit_array.h; sourceTree = "<group>"; };
-		90A8473D29D0B57200C88EDC /* codec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = codec.h; path = codec/codec.h; sourceTree = "<group>"; };
-		90A8473E29D0B57300C88EDC /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = utils.h; path = codec/utils.h; sourceTree = "<group>"; };
-		90A8473F29D0B57300C88EDC /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CMakeLists.txt; path = codec/CMakeLists.txt; sourceTree = "<group>"; };
-		90A8474029D0B57300C88EDC /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = codec/main.c; sourceTree = "<group>"; };
-		90A8474129D0B57300C88EDC /* codec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = codec.c; path = codec/codec.c; sourceTree = "<group>"; };
-		90A8474229D0B57300C88EDC /* bit_array.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bit_array.c; path = codec/bit_array.c; sourceTree = "<group>"; };
-		90A8474329D0B57300C88EDC /* utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = utils.c; path = codec/utils.c; sourceTree = "<group>"; };
 		90A8475729D0BFD000C88EDC /* tests.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tests.c; path = test/tests.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,7 +81,7 @@
 				90079F9F29D0C734002243D4 /* README.md */,
 				90A8475929D0BFDE00C88EDC /* external */,
 				90A8475629D0BFA000C88EDC /* test */,
-				90A8474829D0BB4D00C88EDC /* codec */,
+				90A8474829D0BB4D00C88EDC /* rf_codec */,
 				90A8473329D0B4E400C88EDC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -95,19 +95,19 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		90A8474829D0BB4D00C88EDC /* codec */ = {
+		90A8474829D0BB4D00C88EDC /* rf_codec */ = {
 			isa = PBXGroup;
 			children = (
-				90A8474229D0B57300C88EDC /* bit_array.c */,
-				90A8473C29D0B57200C88EDC /* bit_array.h */,
-				90A8473F29D0B57300C88EDC /* CMakeLists.txt */,
-				90A8474129D0B57300C88EDC /* codec.c */,
-				90A8473D29D0B57200C88EDC /* codec.h */,
-				90A8474029D0B57300C88EDC /* main.c */,
-				90A8474329D0B57300C88EDC /* utils.c */,
-				90A8473E29D0B57300C88EDC /* utils.h */,
+				90079FC829D310FF002243D4 /* bit_array.c */,
+				90079FC429D310FF002243D4 /* bit_array.h */,
+				90079FCA29D310FF002243D4 /* CMakeLists.txt */,
+				90079FC629D310FF002243D4 /* hamming_codec.c */,
+				90079FC929D310FF002243D4 /* hamming_codec.h */,
+				90079FCB29D310FF002243D4 /* main.c */,
+				90079FC529D310FF002243D4 /* utils.c */,
+				90079FC729D310FF002243D4 /* utils.h */,
 			);
-			name = codec;
+			name = rf_codec;
 			sourceTree = "<group>";
 		};
 		90A8475629D0BFA000C88EDC /* test */ = {
@@ -184,7 +184,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 90A8472D29D0B4E400C88EDC /* Build configuration list for PBXProject "HammingCodec" */;
+			buildConfigurationList = 90A8472D29D0B4E400C88EDC /* Build configuration list for PBXProject "RFCodec" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -235,10 +235,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90A8474529D0B57300C88EDC /* codec.c in Sources */,
-				90A8474729D0B57300C88EDC /* utils.c in Sources */,
-				90A8474629D0B57300C88EDC /* bit_array.c in Sources */,
-				90A8474429D0B57300C88EDC /* main.c in Sources */,
+				90079FCF29D310FF002243D4 /* main.c in Sources */,
+				90079FCD29D310FF002243D4 /* hamming_codec.c in Sources */,
+				90079FCE29D310FF002243D4 /* bit_array.c in Sources */,
+				90079FCC29D310FF002243D4 /* utils.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,7 +402,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		90A8472D29D0B4E400C88EDC /* Build configuration list for PBXProject "HammingCodec" */ = {
+		90A8472D29D0B4E400C88EDC /* Build configuration list for PBXProject "RFCodec" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				90A8473729D0B4E400C88EDC /* Debug */,

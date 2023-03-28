@@ -1,9 +1,9 @@
-project("Hamming Codec" C)
+project("RF Codec" C)
 cmake_minimum_required(VERSION 3.0)
 
 set(TARGET_GROUP production CACHE STRING "Group to build")
 
-add_subdirectory(codec)
+add_subdirectory(rf_codec)
 
 if(TARGET_GROUP STREQUAL production)
 elseif(TARGET_GROUP STREQUAL test)
