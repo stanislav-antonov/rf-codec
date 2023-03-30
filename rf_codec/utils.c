@@ -22,3 +22,15 @@ uint16_t utils_unpack(uint16_t* data, uint16_t length, char* unpacked) {
     
     return length * 2;
 }
+
+uint8_t utils_get_bit(uint16_t data, uint8_t index) {
+    return ((data & (1 << index)) >> index);
+}
+
+void utils_set_bit(uint16_t* data, uint8_t index, uint8_t bit) {
+    *data = ((*data & ~(1 << index)) | (bit <<  index));
+}
+
+uint8_t utils_bit_is_set(uint16_t data, uint8_t index) {
+    return ((data >> index) & 1);
+}
