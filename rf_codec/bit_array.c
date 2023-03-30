@@ -8,6 +8,10 @@ void bit_array_set_bit(uint16_t array[], uint8_t bit_index) {
     array[bit_index / 16] |= 1 << (bit_index % 16);
 }
 
+void bit_array_clear_bit(uint16_t array[], uint8_t bit_index) {
+    array[bit_index / 16] &= ~(1 << (bit_index % 16));
+}
+
 uint8_t bit_array_get_bit(uint16_t array[], uint8_t bit_index) {
     return ((array[bit_index / 16] & (1 << (bit_index % 16)))) != 0;
 }
@@ -25,3 +29,12 @@ uint16_t bit_array_get_bits(uint16_t array[], uint8_t bit_index_offset, uint8_t 
     return result;
 }
 
+void bit_array_append_bits(uint16_t array[], uint16_t length, uint16_t bits) {
+    uint16_t index = length / 16;
+    uint16_t offset = length % 16;
+    
+    array[index] |= bits << offset;
+    if (offset) {
+        array[index + 1] |= bits >> (16 - offset);
+    }
+}

@@ -85,12 +85,16 @@ uint16_t hamming_encode(char* data, uint16_t data_length, enum HammingDataWord d
             utils_set_bit(&cw, parity_bit_index, parity_bit);
         }
         
-        for (uint8_t cw_bit_index = 0; cw_bit_index < cw_parameters.total_bits_count; cw_bit_index++) {
-            uint8_t cw_bit = (cw & (1 << cw_bit_index)) >> cw_bit_index;
-            if (cw_bit) {
-                bit_array_set_bit(code_words_buffer, cw_offset + cw_bit_index);
-            }
-        }
+        bit_array_append_bits(code_words_buffer, cw_offset, cw);
+        
+        print_array(code_words_buffer, data_length + 1);
+    }
+    
+    print_array(code_words_buffer, data_length + 1);
+    
+    for (uint16_t i = 0; i < 48; i++) {
+        uint8_t bit = bit_array_get_bit(code_words_buffer, i);
+        printf("%d", bit);
     }
     
     uint16_t code_words_count = data_words_buffer_length;

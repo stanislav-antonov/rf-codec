@@ -34,3 +34,14 @@ void utils_set_bit(uint16_t* data, uint8_t index, uint8_t bit) {
 uint8_t utils_bit_is_set(uint16_t data, uint8_t index) {
     return ((data >> index) & 1);
 }
+
+void print_array(uint16_t *array, int n) {
+    printf("[");
+    for (uint16_t i = 0; i < n; i++) {
+        if (i == (n-1)) {
+            printf("%d]\n", array[i]);
+        } else {
+            printf("%d, ", array[i]);
+        }
+    }
+}
