@@ -15,7 +15,7 @@ uint8_t calculate_parity_bit(uint16_t cw, struct HammingCodeWordParameters cw_pa
             uint8_t cw_bit_position = cw_bit_index + 1;
             if ((cw_bit_position & parity_bit_position))
             {
-                uint8_t cw_data_bit = utils_get_bit(cw, (cw_parameters.total_bits_count - 1) - cw_bit_index);
+                uint8_t cw_data_bit = utils_get_bit(cw, cw_bit_index);
                 parity_bit ^= cw_data_bit;
             }
         }
@@ -71,7 +71,7 @@ uint16_t hamming_encode(char* data, uint16_t data_length, enum HammingDataWord d
             
             if (!is_parity_bit_index) {
                 uint8_t dw_bit = utils_get_bit(dw, dw_bit_index);
-                utils_set_bit(&cw, ((cw_parameters.total_bits_count - 1) - cw_bit_index), dw_bit);
+                utils_set_bit(&cw, cw_bit_index, dw_bit);
                 dw_bit_index++;
             }
         }
@@ -80,7 +80,7 @@ uint16_t hamming_encode(char* data, uint16_t data_length, enum HammingDataWord d
         for (uint8_t i = cw_parameters.parity_bits_count; i-- > 0;) {
             uint8_t parity_bit_position = (1 << i);
             uint8_t parity_bit = calculate_parity_bit(cw, cw_parameters, parity_bit_position);
-            uint8_t parity_bit_index = cw_parameters.total_bits_count - parity_bit_position;
+            uint8_t parity_bit_index = parity_bit_position - 1;
             
             utils_set_bit(&cw, parity_bit_index, parity_bit);
         }
