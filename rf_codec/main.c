@@ -6,21 +6,17 @@
 #include "ccitt_whitening.h"
 
 int main(int argc, const char * argv[]) {
-    /*
+    
     int n = 4;
-    int size = 5;
-    char data[] = { 0b10111011, 0b10111011, 0b10111011, 0b10111011, 0b10111011 };
+    int size = 2;
+    char data[] = { 0b11001100, 0b10001000 };
     char encoded[size * 3];
     
-    hamming_encode(data, size, n, encoded);
+    uint16_t count = hamming_encode(data, size, n, encoded);
     
-    printf("data: %s\n", data);
-    printf("code words: %s\n", encoded);
-    */
-    
-    uint8_t data[] = {  0x11, 0x22, 0x33, 0x44 };
-    
-    ccitt_whitening(data, 4);
+    for(uint8_t i = 0; i < count; i++) {
+        printf("byte: %c\n", encoded[i]);
+    }
     
     return 0;
 }
