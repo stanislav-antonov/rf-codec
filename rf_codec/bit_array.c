@@ -61,3 +61,12 @@ void bit_array_append_bits_16(uint16_t array[], uint16_t length, uint16_t bits) 
 void bit_array_append_bits_8(uint8_t array[], uint16_t length, uint16_t bits) {
     bit_array_append_bits(array, length, bits, 8);
 }
+
+void bit_array_print_as_bits_8(uint8_t array[], uint16_t length) {
+    for (uint16_t i = 0; i < length; i++) {
+        uint8_t bit = bit_array_get_bit_8(array, i);
+        printf("%d", bit);
+    }
+    
+    printf("\n");
+}

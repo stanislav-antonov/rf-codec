@@ -32,7 +32,6 @@ void hamming_encoding_test() {
     UNITY_TEST_ASSERT_EQUAL_UINT8_ARRAY(expected, encoded_data, encoded_data_length, __LINE__, NULL);
 }
 
-
 int main(int argc, const char * argv[]) {
     UNITY_BEGIN();
     

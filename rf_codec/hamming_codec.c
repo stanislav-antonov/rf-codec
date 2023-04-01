@@ -90,19 +90,8 @@ uint16_t hamming_encode(uint8_t* data, uint16_t data_length, enum HammingDataWor
         bit_array_append_bits_8(encoded, cw_offset, cw);
     }
     
-    printf("\n");
-    for (uint16_t i = 0; i < data_bits_count; i++) {
-        uint8_t bit = bit_array_get_bit_8(data, i);
-        printf("%d", bit);
-    }
-    
-    printf("\n");
-    for (uint16_t i = 0; i < code_words_bit_count; i++) {
-        uint8_t bit = bit_array_get_bit_8(encoded, i);
-        printf("%d", bit);
-    }
-    
-    printf("\n");
+    bit_array_print_as_bits_8(data, data_bits_count);
+    bit_array_print_as_bits_8(encoded, code_words_bit_count);
     
     uint16_t encoded_length = utils_div_ceil(code_words_bit_count, 8);
     

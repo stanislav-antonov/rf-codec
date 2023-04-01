@@ -26,4 +26,6 @@ void bit_array_append_bits_16(uint16_t array[], uint16_t length, uint16_t bits);
 
 void bit_array_append_bits_8(uint8_t array[], uint16_t length, uint16_t bits);
 
+void bit_array_print_as_bits_8(uint8_t array[], uint16_t length);
+
 #endif
