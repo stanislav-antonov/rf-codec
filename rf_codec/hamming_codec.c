@@ -8,14 +8,14 @@ uint8_t calculate_parity_bit(uint16_t cw, struct HammingCodeWordParameters cw_pa
     
     uint8_t parity_bit = 0;
     
-    for (uint8_t cw_bit_index = cw_parameters.total_bits_count; cw_bit_index-- > 0;) {
+    for (uint8_t cw_bit_index = 0; cw_bit_index < cw_parameters.total_bits_count; cw_bit_index++) {
         uint8_t is_parity_bit_index = ((cw_parameters.parity_bits_index_mask >> cw_bit_index) & 1);
         if (!is_parity_bit_index) {
             // this is a data bit
             uint8_t cw_bit_position = cw_bit_index + 1;
             if ((cw_bit_position & parity_bit_position))
             {
-                uint8_t cw_data_bit = utils_get_bit(cw, cw_bit_index);
+                uint8_t cw_data_bit = utils_get_bit(cw, (cw_parameters.total_bits_count - 1) - cw_bit_index);
                 parity_bit ^= cw_data_bit;
             }
         }
@@ -65,11 +65,6 @@ uint16_t hamming_encode(uint8_t* data, uint16_t data_length, enum HammingDataWor
     uint16_t code_words_buffer[code_words_buffer_length];
     memset(code_words_buffer, 0, sizeof(code_words_buffer));
     
-    for (uint16_t i = 0; i < code_words_bit_count; i++) {
-        uint8_t bit = bit_array_get_bit_16(code_words_buffer, i);
-        printf("%d", bit);
-    }
-    
     for (uint8_t dw_offset = 0, cw_offset = 0;
          dw_offset < data_bits_count;
          dw_offset += dw_bits_count, cw_offset += cw_parameters.total_bits_count
@@ -82,23 +77,24 @@ uint16_t hamming_encode(uint8_t* data, uint16_t data_length, enum HammingDataWor
         
         // Start composing hamming codewords:
         // scatter the data and parity bit placeholders on proper positions across Hamming code words
-        for (uint8_t cw_bit_index = cw_parameters.total_bits_count; cw_bit_index-- > 0;) {
+        for (uint8_t cw_bit_index = 0; cw_bit_index < cw_parameters.total_bits_count; cw_bit_index++) {
+            
             // check whether a bit is set (1) for the given cw_bit_index position
             // at the mask, thus to determine all the data bit positions
             uint8_t is_parity_bit_index = utils_bit_is_set(cw_parameters.parity_bits_index_mask, cw_bit_index);
             
             if (!is_parity_bit_index) {
-                uint8_t dw_bit = utils_get_bit(dw, dw_bit_index);
-                utils_set_bit(&cw, cw_bit_index, dw_bit);
+                uint8_t dw_bit = utils_get_bit(dw, ((dw_bits_count - 1) - dw_bit_index));
+                utils_set_bit(&cw, ((cw_parameters.total_bits_count - 1) - cw_bit_index), dw_bit);
                 dw_bit_index++;
             }
         }
         
         // Calculate parity bits and place them to proper positions in the code words
-        for (uint8_t i = cw_parameters.parity_bits_count; i-- > 0;) {
+        for (uint8_t i = 0; i < cw_parameters.parity_bits_count; i++) {
             uint8_t parity_bit_position = (1 << i);
             uint8_t parity_bit = calculate_parity_bit(cw, cw_parameters, parity_bit_position);
-            uint8_t parity_bit_index = parity_bit_position - 1;
+            uint8_t parity_bit_index = cw_parameters.total_bits_count - parity_bit_position;
             
             utils_set_bit(&cw, parity_bit_index, parity_bit);
         }
@@ -108,22 +104,21 @@ uint16_t hamming_encode(uint8_t* data, uint16_t data_length, enum HammingDataWor
         print_array_16(code_words_buffer, code_words_buffer_length);
     }
     
-    // print_array(code_words_buffer, data_length);
+    uint16_t result = utils_unpack(code_words_buffer, code_words_buffer_length, encoded);
     
-    for (uint16_t i = 0; i < code_words_bit_count; i++) {
-        uint8_t bit = bit_array_get_bit_16(code_words_buffer, i);
+    printf("\n");
+    for (uint16_t i = 0; i < data_bits_count; i++) {
+        uint8_t bit = bit_array_get_bit_8(data, i);
         printf("%d", bit);
     }
     
-    uint16_t result = utils_unpack(code_words_buffer, code_words_buffer_length, encoded);
-    
-    //print_array_8(encoded, result + 30);
     printf("\n");
-    
     for (uint16_t i = 0; i < code_words_bit_count; i++) {
         uint8_t bit = bit_array_get_bit_8(encoded, i);
         printf("%d", bit);
     }
+    
+    printf("\n");
     
     return result;
 }
