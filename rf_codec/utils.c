@@ -4,7 +4,7 @@
 
 #include "utils.h"
 
-uint16_t utils_pack(char* data, uint16_t length, uint16_t* packed) {
+uint16_t utils_pack(uint8_t* data, uint16_t length, uint16_t* packed) {
     uint16_t packed_length = 0;
     for (uint8_t i = 0, j = 0; i < length; i += 2, j++) {
         packed[j] = (uint8_t)data[i] | (data[i + 1] << 8);
@@ -14,7 +14,7 @@ uint16_t utils_pack(char* data, uint16_t length, uint16_t* packed) {
     return packed_length;
 }
 
-uint16_t utils_unpack(uint16_t* data, uint16_t length, char* unpacked) {
+uint16_t utils_unpack(uint16_t* data, uint16_t length, uint8_t* unpacked) {
     for (uint8_t i = 0, j = 0; i < length; i++, j += 2) {
         unpacked[j] = data[i] & 0xff;
         unpacked[j + 1] = ((data[i] >> 8) & 0xff);
@@ -35,7 +35,22 @@ uint8_t utils_bit_is_set(uint16_t data, uint8_t index) {
     return ((data >> index) & 1);
 }
 
-void print_array(uint16_t *array, int n) {
+uint16_t utils_div_ceil(uint16_t x, uint16_t y) {
+    return 1 + ((x - 1) / y);
+}
+
+void print_array_16(uint16_t *array, uint16_t n) {
+    printf("[");
+    for (uint16_t i = 0; i < n; i++) {
+        if (i == (n-1)) {
+            printf("%d]\n", array[i]);
+        } else {
+            printf("%d, ", array[i]);
+        }
+    }
+}
+
+void print_array_8(uint8_t *array, uint16_t n) {
     printf("[");
     for (uint16_t i = 0; i < n; i++) {
         if (i == (n-1)) {

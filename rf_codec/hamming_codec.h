@@ -24,6 +24,6 @@ struct HammingCodeWordParameters {
     uint16_t parity_bits_index_mask;
 };
 
-uint16_t hamming_encode(char* data, uint16_t data_length, enum HammingDataWord dw_bits_count, char* encoded);
+uint16_t hamming_encode(uint8_t* data, uint16_t data_length, enum HammingDataWord dw_bits_count, uint8_t* encoded);
 
 #endif

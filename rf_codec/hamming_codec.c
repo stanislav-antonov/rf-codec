@@ -45,15 +45,33 @@ struct HammingCodeWordParameters hamming_calculate_cw_parameters(enum HammingDat
     return parameters;
 }
 
-uint16_t hamming_encode(char* data, uint16_t data_length, enum HammingDataWord dw_bits_count, char* encoded) {
-    uint16_t code_words_buffer[data_length];
-    uint16_t data_words_buffer[(data_length / 2) + 1];
-    uint16_t data_words_buffer_length = utils_pack(data, data_length, data_words_buffer);
+uint16_t hamming_encode(uint8_t* data, uint16_t data_length, enum HammingDataWord dw_bits_count, uint8_t* encoded) {
+    
+    uint16_t data_bits_count = 8 * data_length;
+    
+    uint16_t data_words_count = utils_div_ceil(data_bits_count, dw_bits_count);
+    uint16_t data_words_buffer_length = utils_div_ceil(data_bits_count, 16);
+    
+    uint16_t data_words_buffer[data_words_buffer_length];
+    memset(data_words_buffer, 0, sizeof(data_words_buffer));
+    
+    utils_pack(data, data_length, data_words_buffer);
     
     struct HammingCodeWordParameters cw_parameters = hamming_calculate_cw_parameters(dw_bits_count);
     
+    uint16_t code_words_bit_count = data_words_count * cw_parameters.total_bits_count;
+    uint16_t code_words_buffer_length = utils_div_ceil(code_words_bit_count, 16);
+    
+    uint16_t code_words_buffer[code_words_buffer_length];
+    memset(code_words_buffer, 0, sizeof(code_words_buffer));
+    
+    for (uint16_t i = 0; i < code_words_bit_count; i++) {
+        uint8_t bit = bit_array_get_bit_16(code_words_buffer, i);
+        printf("%d", bit);
+    }
+    
     for (uint8_t dw_offset = 0, cw_offset = 0;
-         dw_offset < data_words_buffer_length * 16;
+         dw_offset < data_bits_count;
          dw_offset += dw_bits_count, cw_offset += cw_parameters.total_bits_count
          ) {
         
@@ -87,16 +105,25 @@ uint16_t hamming_encode(char* data, uint16_t data_length, enum HammingDataWord d
         
         bit_array_append_bits(code_words_buffer, cw_offset, cw);
         
-        print_array(code_words_buffer, data_length + 1);
+        print_array_16(code_words_buffer, code_words_buffer_length);
     }
     
-    print_array(code_words_buffer, data_length + 1);
+    // print_array(code_words_buffer, data_length);
     
-    for (uint16_t i = 0; i < 48; i++) {
-        uint8_t bit = bit_array_get_bit(code_words_buffer, i);
+    for (uint16_t i = 0; i < code_words_bit_count; i++) {
+        uint8_t bit = bit_array_get_bit_16(code_words_buffer, i);
         printf("%d", bit);
     }
     
-    uint16_t code_words_count = data_words_buffer_length;
-    return utils_unpack(code_words_buffer, code_words_count, encoded);
+    uint16_t result = utils_unpack(code_words_buffer, code_words_buffer_length, encoded);
+    
+    //print_array_8(encoded, result + 30);
+    printf("\n");
+    
+    for (uint16_t i = 0; i < code_words_bit_count; i++) {
+        uint8_t bit = bit_array_get_bit_8(encoded, i);
+        printf("%d", bit);
+    }
+    
+    return result;
 }
