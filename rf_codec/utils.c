@@ -4,6 +4,17 @@
 
 #include "utils.h"
 
+#define print_array(type_t, array, n) ({ \
+    printf("["); \
+    for (uint16_t i = 0; i < n; i++) { \
+        if (i == (n - 1)) { \
+            printf("%d]\n", (type_t)array[i]); \
+        } else { \
+            printf("%d, ", (type_t)array[i]); \
+        } \
+    } \
+}) \
+
 uint16_t utils_pack(uint8_t* data, uint16_t length, uint16_t* packed) {
     uint16_t packed_length = 0;
     for (uint8_t i = 0, j = 0; i < length; i += 2, j++) {
@@ -40,23 +51,9 @@ uint16_t utils_div_ceil(uint16_t x, uint16_t y) {
 }
 
 void print_array_16(uint16_t *array, uint16_t n) {
-    printf("[");
-    for (uint16_t i = 0; i < n; i++) {
-        if (i == (n-1)) {
-            printf("%d]\n", array[i]);
-        } else {
-            printf("%d, ", array[i]);
-        }
-    }
+    print_array(uint16_t, array, n);
 }
 
 void print_array_8(uint8_t *array, uint16_t n) {
-    printf("[");
-    for (uint16_t i = 0; i < n; i++) {
-        if (i == (n-1)) {
-            printf("%d]\n", array[i]);
-        } else {
-            printf("%d, ", array[i]);
-        }
-    }
+    print_array(uint8_t, array, n);
 }
