@@ -22,6 +22,7 @@ void hamming_encoding_test() {
     uint8_t data_length = 3;
     uint8_t dw_bits_count = 4;
     uint8_t encoded_data[data_length * 4];
+    memset(encoded_data, 0, sizeof(encoded_data));
     uint8_t source_data[] = { 0x88, 0x44, 0xCC };
     
     uint16_t encoded_data_length = hamming_encode(source_data, data_length, dw_bits_count, encoded_data);

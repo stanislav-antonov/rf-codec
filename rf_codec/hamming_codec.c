@@ -48,32 +48,20 @@ struct HammingCodeWordParameters hamming_calculate_cw_parameters(enum HammingDat
 uint16_t hamming_encode(uint8_t* data, uint16_t data_length, enum HammingDataWord dw_bits_count, uint8_t* encoded) {
     
     uint16_t data_bits_count = 8 * data_length;
-    
     uint16_t data_words_count = utils_div_ceil(data_bits_count, dw_bits_count);
-    uint16_t data_words_buffer_length = utils_div_ceil(data_bits_count, 16);
-    
-    uint16_t data_words_buffer[data_words_buffer_length];
-    memset(data_words_buffer, 0, sizeof(data_words_buffer));
-    
-    utils_pack(data, data_length, data_words_buffer);
     
     struct HammingCodeWordParameters cw_parameters = hamming_calculate_cw_parameters(dw_bits_count);
     
     uint16_t code_words_bit_count = data_words_count * cw_parameters.total_bits_count;
-    uint16_t code_words_buffer_length = utils_div_ceil(code_words_bit_count, 16);
-    
-    uint16_t code_words_buffer[code_words_buffer_length];
-    memset(code_words_buffer, 0, sizeof(code_words_buffer));
     
     for (uint8_t dw_offset = 0, cw_offset = 0;
          dw_offset < data_bits_count;
          dw_offset += dw_bits_count, cw_offset += cw_parameters.total_bits_count
          ) {
         
-        uint16_t cw = 0;
-        
         uint8_t dw_bit_index = 0;
-        uint16_t dw = bit_array_get_bits_16(data_words_buffer, dw_offset, dw_bits_count);
+        uint16_t cw = 0;
+        uint16_t dw = bit_array_get_bits_8(data, dw_offset, dw_bits_count);
         
         // Start composing hamming codewords:
         // scatter the data and parity bit placeholders on proper positions across Hamming code words
@@ -99,12 +87,8 @@ uint16_t hamming_encode(uint8_t* data, uint16_t data_length, enum HammingDataWor
             utils_set_bit(&cw, parity_bit_index, parity_bit);
         }
         
-        bit_array_append_bits_16(code_words_buffer, cw_offset, cw);
-        
-        print_array_16(code_words_buffer, code_words_buffer_length);
+        bit_array_append_bits_8(encoded, cw_offset, cw);
     }
-    
-    uint16_t encoded_length = utils_unpack(code_words_buffer, code_words_buffer_length, encoded);
     
     printf("\n");
     for (uint16_t i = 0; i < data_bits_count; i++) {
@@ -120,7 +104,7 @@ uint16_t hamming_encode(uint8_t* data, uint16_t data_length, enum HammingDataWor
     
     printf("\n");
     
-    print_array_8(encoded, encoded_length);
+    uint16_t encoded_length = utils_div_ceil(code_words_bit_count, 8);
     
     return encoded_length;
 }
