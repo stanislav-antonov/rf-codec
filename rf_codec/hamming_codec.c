@@ -106,22 +106,19 @@ uint16_t hamming_decode(uint8_t* data, uint16_t data_length, enum HammingDataWor
     for (uint16_t cw_offset = 0; cw_offset < cw_bits_count; cw_offset += cw_parameters.total_bits_count
          ) {
         
-        uint16_t error_bit_index = 0;
         uint16_t cw = bit_array_get_bits_8(data, cw_offset, cw_parameters.total_bits_count);
         
-        // Calculate parity bits and place them to proper positions in the code words
-        for (uint8_t i = 0; i < cw_parameters.parity_bits_count; i++) {
-            uint8_t parity_bit_position = (1 << i);
-            uint8_t parity_bit = calculate_parity_bit(cw, cw_parameters, parity_bit_position);
-            uint8_t parity_bit_index = cw_parameters.total_bits_count - parity_bit_position;
-            
-            if (parity_bit != utils_get_bit(cw, parity_bit_index)) {
-                error_bit_index += parity_bit_index;
+        uint8_t syndrome = 0;
+        for (uint8_t cw_bit_index = 0; cw_bit_index < cw_parameters.total_bits_count; cw_bit_index++) {
+            uint8_t cw_bit = utils_get_bit(cw, ((cw_parameters.total_bits_count - 1) - cw_bit_index));
+            if (cw_bit) {
+                syndrome ^= (cw_bit_index + 1);
             }
         }
         
-        if (error_bit_index != 0) {
-            // correct the errors
+        if (syndrome) {
+            uint8_t error_bit_index = (cw_parameters.total_bits_count - syndrome);
+            utils_set_bit(&cw, error_bit_index, utils_get_bit(cw, error_bit_index) ^ 1);
         }
         
         uint16_t dw = 0;
@@ -134,8 +131,8 @@ uint16_t hamming_decode(uint8_t* data, uint16_t data_length, enum HammingDataWor
             uint8_t is_parity_bit_index = utils_bit_is_set(cw_parameters.parity_bits_index_mask, cw_bit_index);
             
             if (!is_parity_bit_index) {
-                uint8_t dw_bit = utils_get_bit(cw, ((cw_parameters.total_bits_count - 1) - cw_bit_index));
-                utils_set_bit(&dw, ((dw_bits_count - 1) - dw_bit_index), dw_bit);
+                uint8_t cw_bit = utils_get_bit(cw, ((cw_parameters.total_bits_count - 1) - cw_bit_index));
+                utils_set_bit(&dw, ((dw_bits_count - 1) - dw_bit_index), cw_bit);
                 dw_bit_index++;
             }
         }

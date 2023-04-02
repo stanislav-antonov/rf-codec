@@ -6,6 +6,7 @@
 #include "unity.h"
 #include "ccitt_whitening.h"
 #include "hamming_codec.h"
+#include "bit_array.h"
 
 void setUp(void) {}
 
@@ -46,7 +47,7 @@ void hamming_decoding_test() {
     UNITY_TEST_ASSERT_EQUAL_UINT8_ARRAY(expected, decoded_data, decoded_data_length, __LINE__, NULL);
 }
 
-void hamming_encoding_decoding_test() {
+void hamming_encoding_decoding_no_errors_test() {
     uint8_t data_length = 7;
     uint8_t dw_bits_count = 4;
     uint8_t encoded_data[data_length * 4];
@@ -70,7 +71,7 @@ int main(int argc, const char * argv[]) {
     ccitt_whitening_test();
     hamming_encoding_test();
     hamming_decoding_test();
-    hamming_encoding_decoding_test();
+    hamming_encoding_decoding_no_errors_test();
     
     return UNITY_END();
 }

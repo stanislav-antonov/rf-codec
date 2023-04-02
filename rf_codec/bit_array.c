@@ -4,6 +4,14 @@
 
 #include "bit_array.h"
 
+#define bit_array_set_bit(array, bit_index, n) ({ \
+    array[bit_index / n] |= 1 << (bit_index % n); \
+}) \
+
+#define bit_array_clear_bit(array, bit_index, n) ({ \
+    array[bit_index / n] &= ~(1 << (bit_index % n)); \
+}) \
+
 #define bit_array_get_bit(array, bit_index, n) ({ \
     uint8_t retval = ((array[bit_index / n] & (1 << (bit_index % n)))) != 0; \
     retval; \
@@ -31,11 +39,19 @@
 }) \
 
 void bit_array_set_bit_16(uint16_t array[], uint8_t bit_index) {
-    array[bit_index / 16] |= 1 << (bit_index % 16);
+    bit_array_set_bit(array, bit_index, 16);
+}
+
+void bit_array_set_bit_8(uint8_t array[], uint8_t bit_index) {
+    bit_array_set_bit(array, bit_index, 8);
 }
 
 void bit_array_clear_bit_16(uint16_t array[], uint8_t bit_index) {
-    array[bit_index / 16] &= ~(1 << (bit_index % 16));
+    bit_array_clear_bit(array, bit_index, 16);
+}
+
+void bit_array_clear_bit_8(uint8_t array[], uint8_t bit_index) {
+    bit_array_clear_bit(array, bit_index, 8);
 }
 
 uint8_t bit_array_get_bit_16(uint16_t array[], uint8_t bit_index) {
