@@ -12,7 +12,11 @@ int main(int argc, const char * argv[]) {
     uint8_t encoded[size * 4];
     memset(encoded, 0, sizeof(encoded));
     
-    hamming_encode(data, size, n, encoded);
+    uint16_t encoded_length = hamming_encode(data, size, n, encoded);
+    
+    uint8_t data_decoded[3];
+    memset(data_decoded, 0, sizeof(data_decoded));
+    hamming_decode(encoded, encoded_length, n, data_decoded);
     
     return 0;
 }

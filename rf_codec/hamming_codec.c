@@ -54,7 +54,7 @@ uint16_t hamming_encode(uint8_t* data, uint16_t data_length, enum HammingDataWor
     
     uint16_t code_words_bit_count = data_words_count * cw_parameters.total_bits_count;
     
-    for (uint8_t dw_offset = 0, cw_offset = 0;
+    for (uint16_t dw_offset = 0, cw_offset = 0;
          dw_offset < data_bits_count;
          dw_offset += dw_bits_count, cw_offset += cw_parameters.total_bits_count
          ) {
@@ -90,10 +90,59 @@ uint16_t hamming_encode(uint8_t* data, uint16_t data_length, enum HammingDataWor
         bit_array_append_bits_8(encoded, cw_offset, cw);
     }
     
-    bit_array_print_as_bits_8(data, data_bits_count);
-    bit_array_print_as_bits_8(encoded, code_words_bit_count);
+    // bit_array_print_as_bits_8(data, data_bits_count);
+    // bit_array_print_as_bits_8(encoded, code_words_bit_count);
     
-    uint16_t encoded_length = utils_div_ceil(code_words_bit_count, 8);
+    return utils_div_ceil(code_words_bit_count, 8);
+}
+
+uint16_t hamming_decode(uint8_t* data, uint16_t data_length, enum HammingDataWord dw_bits_count, uint8_t* decoded) {
     
-    return encoded_length;
+    struct HammingCodeWordParameters cw_parameters = hamming_calculate_cw_parameters(dw_bits_count);
+    
+    uint16_t dw_offset = 0;
+    uint16_t cw_bits_count = ((8 * data_length) % cw_parameters.total_bits_count) * cw_parameters.total_bits_count;
+    
+    for (uint16_t cw_offset = 0; cw_offset < cw_bits_count; cw_offset += cw_parameters.total_bits_count
+         ) {
+        
+        uint16_t error_bit_index = 0;
+        uint16_t cw = bit_array_get_bits_8(data, cw_offset, cw_parameters.total_bits_count);
+        
+        // Calculate parity bits and place them to proper positions in the code words
+        for (uint8_t i = 0; i < cw_parameters.parity_bits_count; i++) {
+            uint8_t parity_bit_position = (1 << i);
+            uint8_t parity_bit = calculate_parity_bit(cw, cw_parameters, parity_bit_position);
+            uint8_t parity_bit_index = cw_parameters.total_bits_count - parity_bit_position;
+            
+            if (parity_bit != utils_get_bit(cw, parity_bit_index)) {
+                error_bit_index += parity_bit_index;
+            }
+        }
+        
+        if (error_bit_index != 0) {
+            // correct the errors
+        }
+        
+        uint16_t dw = 0;
+        uint8_t dw_bit_index = 0;
+        
+        for (uint8_t cw_bit_index = 0; cw_bit_index < cw_parameters.total_bits_count; cw_bit_index++) {
+            
+            // check whether a bit is set (1) for the given cw_bit_index position
+            // at the mask, thus to determine all the data bit positions
+            uint8_t is_parity_bit_index = utils_bit_is_set(cw_parameters.parity_bits_index_mask, cw_bit_index);
+            
+            if (!is_parity_bit_index) {
+                uint8_t dw_bit = utils_get_bit(cw, ((cw_parameters.total_bits_count - 1) - cw_bit_index));
+                utils_set_bit(&dw, ((dw_bits_count - 1) - dw_bit_index), dw_bit);
+                dw_bit_index++;
+            }
+        }
+        
+        bit_array_append_bits_8(decoded, dw_offset, dw);
+        dw_offset += dw_bits_count;
+    }
+    
+    return utils_div_ceil(dw_offset, 8);
 }
