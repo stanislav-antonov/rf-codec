@@ -8,6 +8,16 @@ By the moment the library exposes the following functions:
 * Data encoding/decoding with Hamming codes
 * CCITT data whitening
 
+### Hamming codes
+
+Hamming codes are in a class of binary linear error-correcting codes, that capable to correct one-bit errors.
+
+### Data whitening
+
+In wireless RF systems a data to be transmitted may contain long sequences of 0 and 1, that will introduce occurences of a DC bias into transmitted signal. Such thr DC-biased signal will have a non-uniform power distribution over the transmittion channel bandwidth. The DC bias will also introduce data dependencies during an operation of the demodulator. It is higly desirable and optimal for the transmitted data to be random and DC free.
+
+The data whitening is applied to randomize transmitted data bits and provide a near-uniform power distribution.
+
 ## How to run tests
 
 Navigate to the project's root directory and:
