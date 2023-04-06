@@ -1,6 +1,7 @@
 ## Synopsis
 
 This library implements a bundle of various data coding approaches well suitable for wireless data communication over RF.
+
 It is designated to be deployed on embedded devices with relatively modest computing capabilities, in connection with that it leverages fast algorithms and requires a quite small memory footprint.
 
 ## How to run tests
