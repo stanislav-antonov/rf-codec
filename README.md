@@ -1,3 +1,10 @@
+## Motivation
+
+Wireless data transmission over RF has become ubiqutous. Regadless of a particular application, the data has to be decoded error-free after being transmitted over a wireless channel, and this is crutial. 
+
+In practice any transmission channel is affected by noise.
+Considering the noise is characterized as Gaussian, there is a limit that allows the maximum error free transmission rate, possible for a given signal-to-noise ratio (SNR) and channel bandwidth, which is called as Shannon’s Limit.
+
 ## Synopsis
 
 This library implements a bundle of various data coding approaches well suitable for wireless data communication over RF.
