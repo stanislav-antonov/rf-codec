@@ -5,6 +5,8 @@ Wireless data transmission over RF has become ubiqutous. Regadless of a particul
 In practice any transmission channel is affected by noise.
 Considering the noise is characterized as Gaussian, there is a limit that allows the maximum error free transmission rate, possible for a given signal-to-noise ratio (SNR) and channel bandwidth, which is called as Shannon’s Limit.
 
+The noise within the channel can corrupt data during transmission. To eliminate this issue, error correcting codes are leveraged to reveal and correct the errors at receiver side after the data is transmitted. All kinds of error correcting codes are based on incorporation of some redundancy bits to transmitted data, though different algorithms are used for data encoding and decoding. Nevertheless, all of error correcting codes aspire to get closer to the Shannon Limit for data transmission.
+
 ## Synopsis
 
 This library implements a bundle of various data coding approaches well suitable for wireless data communication over RF.
