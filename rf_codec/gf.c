@@ -3,6 +3,7 @@
 //
 
 #include "gf.h"
+#include "utils.h"
 
 static uint8_t gf_exp[256];
 static uint8_t gf_log[256];
@@ -122,7 +123,7 @@ void gf_poly_div(uint8_t * dividend, uint16_t dividend_len,
     if (remainder != NULL) {
         *remainder_len = divisor_len - 1;
         uint16_t offset = dividend_len - *remainder_len;
-        memcpy(remainder, result + offset + 1, *remainder_len * sizeof(uint8_t));
+        memcpy(remainder, result + offset, *remainder_len * sizeof(uint8_t));
     }
 }
 

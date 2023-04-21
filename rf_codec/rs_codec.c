@@ -3,7 +3,6 @@
 //
 
 #include "rs_codec.h"
-#include "utils.h"
 
 void rs_init() {
     gf_init();
@@ -38,11 +37,10 @@ void rs_encode(uint8_t nsym, uint8_t * msg_in, uint16_t msg_in_len, uint8_t * ms
     memset(g, 0, sizeof(g));
     rs_generator_poly(nsym, g, &len_g);
     
-    utils_print_array_8(g, len_g);
-    
     uint16_t msg_in_extended_len = msg_in_len + len_g - 1;
     uint8_t msg_in_extended[msg_in_extended_len];
     memset(msg_in_extended, 0, sizeof(msg_in_extended));
+    memcpy(msg_in_extended, msg_in, sizeof(uint8_t) * msg_in_len);
     
     uint16_t r_len;
     uint8_t r[len_g];
@@ -50,8 +48,7 @@ void rs_encode(uint8_t nsym, uint8_t * msg_in, uint16_t msg_in_len, uint8_t * ms
     
     gf_poly_div(msg_in_extended, msg_in_extended_len, g, len_g, NULL, NULL, r, &r_len);
 
-    utils_print_array_8(r, r_len);
-    
     memcpy(msg_out, msg_in, msg_in_len * sizeof(uint8_t));
     memcpy(msg_out + msg_in_len, r, r_len * sizeof(uint8_t));
+    *msg_out_len = msg_in_len + r_len;
 }

@@ -21,9 +21,8 @@ int main(int argc, const char * argv[]) {
     hamming_decode(encoded, encoded_length, n, data_decoded);
     */
     
-    uint8_t msg_in[] = {0x40, 0xd2, 0x75, 0x47, 0x76, 0x17, 0x32, 0x06, 0x27, 0x26, 0x96, 0xc6, 0xc6, 0x96, 0x70, 0xec};
-    
     uint16_t msg_in_len = 16;
+    uint8_t msg_in[] = {0x40, 0xd2, 0x75, 0x47, 0x76, 0x17, 0x32, 0x06, 0x27, 0x26, 0x96, 0xc6, 0xc6, 0x96, 0x70, 0xec};
     
     uint8_t nsym = 10;
     uint16_t msg_out_len = nsym + msg_in_len;
@@ -31,6 +30,9 @@ int main(int argc, const char * argv[]) {
     
     rs_init();
     rs_encode(nsym, msg_in, msg_in_len, msg_out, &msg_out_len);
+    
+    printf("msg_out:\n");
+    utils_print_array_8(msg_out, msg_out_len);
     
     return 0;
 }
