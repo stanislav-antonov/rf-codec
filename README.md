@@ -15,11 +15,16 @@ It is designated to be deployed on embedded devices with relatively modest compu
 
 By the moment the library exposes the following functions:
 * Data encoding/decoding with Hamming codes
+* Data encoding/decoding with Reed-Solomon codes (only encoder part has been implemented so far, work in progress)
 * CCITT data whitening
 
 ### Hamming codes
 
 Hamming codes are in a class of binary linear error-correcting codes, that capable to correct one-bit errors.
+
+### Reed-Solomon codes
+
+TBD
 
 ### Data whitening
 
