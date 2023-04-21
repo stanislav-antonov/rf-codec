@@ -26,8 +26,8 @@
 		90079FDE29D362EE002243D4 /* ccitt_whitening.h in Sources */ = {isa = PBXBuildFile; fileRef = 90079FD129D314EB002243D4 /* ccitt_whitening.h */; };
 		90079FE129EAE8C3002243D4 /* gf.c in Sources */ = {isa = PBXBuildFile; fileRef = 90079FDF29EAE8C3002243D4 /* gf.c */; };
 		90079FE229EAE8CD002243D4 /* gf.c in Sources */ = {isa = PBXBuildFile; fileRef = 90079FDF29EAE8C3002243D4 /* gf.c */; };
-		90079FE529EE894B002243D4 /* rs_codec.c in Sources */ = {isa = PBXBuildFile; fileRef = 90079FE329EE894B002243D4 /* rs_codec.c */; };
-		90079FE629EE894B002243D4 /* rs_codec.c in Sources */ = {isa = PBXBuildFile; fileRef = 90079FE329EE894B002243D4 /* rs_codec.c */; };
+		90079FE929F2799D002243D4 /* rs_codec.c in Sources */ = {isa = PBXBuildFile; fileRef = 90079FE729F2799D002243D4 /* rs_codec.c */; };
+		90079FEA29F2799D002243D4 /* rs_codec.c in Sources */ = {isa = PBXBuildFile; fileRef = 90079FE729F2799D002243D4 /* rs_codec.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -72,8 +72,8 @@
 		90079FD129D314EB002243D4 /* ccitt_whitening.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ccitt_whitening.h; path = rf_codec/ccitt_whitening.h; sourceTree = "<group>"; };
 		90079FDF29EAE8C3002243D4 /* gf.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = gf.c; path = rf_codec/gf.c; sourceTree = "<group>"; };
 		90079FE029EAE8C3002243D4 /* gf.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = gf.h; path = rf_codec/gf.h; sourceTree = "<group>"; };
-		90079FE329EE894B002243D4 /* rs_codec.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = rs_codec.c; sourceTree = "<group>"; };
-		90079FE429EE894B002243D4 /* rs_codec.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rs_codec.h; sourceTree = "<group>"; };
+		90079FE729F2799D002243D4 /* rs_codec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = rs_codec.c; path = rf_codec/rs_codec.c; sourceTree = "<group>"; };
+		90079FE829F2799D002243D4 /* rs_codec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = rs_codec.h; path = rf_codec/rs_codec.h; sourceTree = "<group>"; };
 		90A8473229D0B4E400C88EDC /* RFCodec */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RFCodec; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A8475729D0BFD000C88EDC /* tests.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tests.c; path = test/tests.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -121,6 +121,8 @@
 		90A8474829D0BB4D00C88EDC /* rf_codec */ = {
 			isa = PBXGroup;
 			children = (
+				90079FE729F2799D002243D4 /* rs_codec.c */,
+				90079FE829F2799D002243D4 /* rs_codec.h */,
 				90079FC829D310FF002243D4 /* bit_array.c */,
 				90079FC429D310FF002243D4 /* bit_array.h */,
 				90079FCA29D310FF002243D4 /* CMakeLists.txt */,
@@ -133,8 +135,6 @@
 				90079FD129D314EB002243D4 /* ccitt_whitening.h */,
 				90079FDF29EAE8C3002243D4 /* gf.c */,
 				90079FE029EAE8C3002243D4 /* gf.h */,
-				90079FE329EE894B002243D4 /* rs_codec.c */,
-				90079FE429EE894B002243D4 /* rs_codec.h */,
 			);
 			name = rf_codec;
 			sourceTree = "<group>";
@@ -242,7 +242,7 @@
 				90079FD729D362EE002243D4 /* bit_array.c in Sources */,
 				90079FE229EAE8CD002243D4 /* gf.c in Sources */,
 				90079FD829D362EE002243D4 /* bit_array.h in Sources */,
-				90079FE629EE894B002243D4 /* rs_codec.c in Sources */,
+				90079FEA29F2799D002243D4 /* rs_codec.c in Sources */,
 				90079FD929D362EE002243D4 /* hamming_codec.c in Sources */,
 				90079FDA29D362EE002243D4 /* hamming_codec.h in Sources */,
 				90079FDB29D362EE002243D4 /* utils.c in Sources */,
@@ -256,7 +256,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90079FE529EE894B002243D4 /* rs_codec.c in Sources */,
+				90079FE929F2799D002243D4 /* rs_codec.c in Sources */,
 				90079FCF29D310FF002243D4 /* main.c in Sources */,
 				90079FCD29D310FF002243D4 /* hamming_codec.c in Sources */,
 				90079FE129EAE8C3002243D4 /* gf.c in Sources */,
