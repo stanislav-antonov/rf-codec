@@ -57,3 +57,7 @@ void print_array_16(uint16_t *array, uint16_t n) {
 void print_array_8(uint8_t *array, uint16_t n) {
     print_array(uint8_t, array, n);
 }
+
+uint16_t utils_max(uint16_t m, uint16_t n) {
+    return (m > n) ? m : n;
+}
