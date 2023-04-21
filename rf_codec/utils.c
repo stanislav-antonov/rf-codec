@@ -50,11 +50,11 @@ uint16_t utils_div_ceil(uint16_t x, uint16_t y) {
     return 1 + ((x - 1) / y);
 }
 
-void print_array_16(uint16_t *array, uint16_t n) {
+void utils_print_array_16(uint16_t *array, uint16_t n) {
     print_array(uint16_t, array, n);
 }
 
-void print_array_8(uint8_t *array, uint16_t n) {
+void utils_print_array_8(uint8_t *array, uint16_t n) {
     print_array(uint8_t, array, n);
 }
 

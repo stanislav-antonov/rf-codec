@@ -30,7 +30,7 @@ void gf_poly_scale(uint8_t * p, uint16_t length, uint8_t x, uint8_t * result);
 
 void gf_poly_add(uint8_t * p, uint8_t * q, uint16_t len_p, uint16_t len_q, uint8_t * r, uint16_t * len_r);
 
-void gf_poly_mult(uint8_t * p, uint8_t * q, uint16_t len_p, uint16_t len_q, uint8_t * r, uint16_t * len_r);
+void gf_poly_mult(uint8_t * p, uint16_t len_p, uint8_t * q, uint16_t len_q, uint8_t * r, uint16_t * len_r);
 
 uint8_t gf_poly_eval(uint8_t * p, uint16_t len_p, uint8_t x);
 

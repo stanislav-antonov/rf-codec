@@ -20,9 +20,9 @@ void utils_set_bit(uint16_t* data, uint8_t index, uint8_t bit);
 
 uint8_t utils_bit_is_set(uint16_t data, uint8_t index);
 
-void print_array_16(uint16_t *array, uint16_t n);
+void utils_print_array_16(uint16_t *array, uint16_t n);
 
-void print_array_8(uint8_t *array, uint16_t n);
+void utils_print_array_8(uint8_t *array, uint16_t n);
 
 uint16_t utils_div_ceil(uint16_t x, uint16_t y);
 
