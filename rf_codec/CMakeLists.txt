@@ -3,6 +3,8 @@ add_library(rf_codec STATIC
     bit_array.c
     hamming_codec.c
     ccitt_whitening.c
+    gf.c
+    rs_codec.c
 )
 
 target_include_directories(rf_codec PUBLIC
