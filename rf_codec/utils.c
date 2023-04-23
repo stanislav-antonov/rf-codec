@@ -61,3 +61,14 @@ void utils_print_array_8(uint8_t *array, uint16_t n) {
 uint16_t utils_max(uint16_t m, uint16_t n) {
     return (m > n) ? m : n;
 }
+
+uint8_t utils_max_array_8(uint8_t * array, uint8_t len) {
+    uint8_t max = array[0];
+    for (uint8_t i = 0; i < len; i++) {
+        if (array[i] > max) {
+            max = array[i];
+        }
+    }
+    
+    return max;
+}

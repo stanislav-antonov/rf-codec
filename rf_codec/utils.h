@@ -28,4 +28,6 @@ uint16_t utils_div_ceil(uint16_t x, uint16_t y);
 
 uint16_t utils_max(uint16_t m, uint16_t n);
 
+uint8_t utils_max_array_8(uint8_t * array, uint8_t len);
+
 #endif

@@ -61,35 +61,36 @@ void gf_poly_scale(uint8_t * p, uint16_t p_len, uint8_t x, uint8_t * result) {
     }
 }
 
-void gf_poly_add(uint8_t * p, uint8_t * q, uint16_t p_len, uint16_t q_len, uint8_t * r, uint16_t * r_len) {
+void gf_poly_add(uint8_t * p, uint16_t p_len, uint8_t * q, uint16_t q_len, uint8_t * r, uint16_t * r_len) {
     
     *r_len = utils_max(p_len, q_len);
     
     for (uint16_t i = 0; i < p_len; i++) {
-        r[i + *r_len + p_len] = p[i];
+        r[i + *r_len - p_len] = p[i];
     }
     
     for (uint16_t i = 0; i < q_len; i++) {
-        r[i + *r_len + q_len] ^= q[i];
+        r[i + *r_len - q_len] ^= q[i];
     }
 }
 
-void gf_poly_mult(uint8_t * p, uint16_t len_p, uint8_t * q, uint16_t len_q, uint8_t * r, uint16_t * len_r) {
+void gf_poly_mult(uint8_t * p, uint16_t p_len, uint8_t * q, uint16_t q_len, uint8_t * r, uint16_t * r_len) {
     
-    *len_r = len_p + len_q - 1;
+    *r_len = p_len + q_len - 1;
     
-    for (uint16_t j = 0; j < len_q; j++) {
-        for (uint16_t i = 0; i < len_p; i++) {
+    for (uint16_t j = 0; j < q_len; j++) {
+        for (uint16_t i = 0; i < p_len; i++) {
             uint8_t val = gf_mult(p[i], q[j]);
             r[i + j] ^= val;
         }
     }
 }
 
-uint8_t gf_poly_eval(uint8_t * p, uint16_t len_p, uint8_t x) {
+uint8_t gf_poly_eval(uint8_t * p, uint16_t p_len, uint8_t x) {
     uint8_t result = p[0];
-    for (uint16_t i = 0; i < len_p; len_p++) {
-        result = gf_mult(result, x) ^ p[i];
+    for (uint16_t i = 1; i < p_len; i++) {
+        result = gf_mult(result, x);
+        result ^= p[i];
     }
     
     return result;

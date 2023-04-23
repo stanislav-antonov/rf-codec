@@ -90,6 +90,33 @@ void reed_solomon_encoding_test() {
     TEST_ASSERT_EQUAL_UINT8_ARRAY_MESSAGE(msg_out_expected, msg_out, msg_out_len, NULL);
 }
 
+void reed_solomon_decoding_test() {
+    uint8_t nsym = 10;
+    uint16_t msg_len = 26;
+    uint8_t msg[] = {0x40, 0xd2, 0x75, 0x47, 0x76, 0x17, 0x32, 0x06, 0x27, 0x26, 0x96, 0xc6, 0xc6, 0x96, 0x70, 0xec, 0xbc, 0x2a, 0x90, 0x13, 0x6b, 0xaf, 0xef, 0xfd, 0x4b, 0xe0 };
+    
+    uint8_t synd_len = nsym + 1;
+    uint8_t synd[synd_len];
+    memset(synd, 0, sizeof(synd));
+    
+    rs_calc_syndromes(msg, msg_len, nsym, synd, &synd_len);
+    
+    TEST_ASSERT_EQUAL_UINT8(nsym + 1, synd_len);
+    
+    uint8_t uncorrupted_msg_synd[] = {0,0,0,0,0,0,0,0,0,0,0};
+    TEST_ASSERT_EQUAL_UINT8_ARRAY_MESSAGE(uncorrupted_msg_synd, synd, synd_len, NULL);
+    
+    msg[0] = 0; // Simulate message corruption
+    
+    rs_calc_syndromes(msg, msg_len, nsym, synd, &synd_len);
+    
+    TEST_ASSERT_EQUAL_UINT8(nsym + 1, synd_len);
+    
+    uint8_t corrupted_msg_synd[] = {0, 64, 192, 93, 231, 52, 92, 228, 49, 83, 245};
+    TEST_ASSERT_EQUAL_UINT8_ARRAY_MESSAGE(corrupted_msg_synd, synd, synd_len, NULL);
+}
+
+
 int main(int argc, const char * argv[]) {
     UNITY_BEGIN();
     
@@ -102,6 +129,7 @@ int main(int argc, const char * argv[]) {
     
     galois_field_ops_test();
     reed_solomon_encoding_test();
+    reed_solomon_decoding_test();
     
     return UNITY_END();
 }

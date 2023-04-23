@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "main:main.c">
+      </ContextState>
+      <ContextState
+         contextName = "hamming_encode:hamming_codec.c">
+      </ContextState>
+      <ContextState
+         contextName = "rs_find_error_locator:rs_codec.c">
+         <PersistentStrings>
+            <PersistentString
+               value = "*(uint8_t(*)[5])old_loc">
+            </PersistentString>
+            <PersistentString
+               value = "*(uint8_t(*)[5])err_loc_result">
+            </PersistentString>
+            <PersistentString
+               value = "*(uint8_t(*)[5])old_loc_scaled">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "rs_generator_poly:rs_codec.c">
+      </ContextState>
+      <ContextState
+         contextName = "gf_poly_div:gf.c">
+      </ContextState>
+      <ContextState
+         contextName = "rs_encode:rs_codec.c">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
