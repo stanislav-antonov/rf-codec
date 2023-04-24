@@ -74,7 +74,7 @@ bool rs_message_is_corrupted(uint8_t * msg, uint16_t msg_len, uint8_t nsym) {
     return res > 0;
 }
 
-void rs_find_error_locator(uint8_t nsym, uint8_t * synd, uint8_t synd_len, uint8_t * err_loc, uint16_t * err_loc_len) {
+bool rs_find_error_locator(uint8_t nsym, uint8_t * synd, uint8_t synd_len, uint8_t * err_loc, uint16_t * err_loc_len) {
     
     err_loc[0] = 1; // errors locator polynomial
     *err_loc_len = 1;
@@ -132,5 +132,29 @@ void rs_find_error_locator(uint8_t nsym, uint8_t * synd, uint8_t synd_len, uint8
         memset(err_loc, 0, sizeof(*err_loc));
         memcpy(err_loc, err_loc_result, *err_loc_len * sizeof(uint8_t));
     }
+    
+    uint16_t errors_count = *err_loc_len - 1;
+    
+    return !(errors_count * 2 > nsym);
+}
 
+bool rs_find_errors(uint8_t * error_loc, uint16_t err_loc_len, uint16_t msg_len, uint8_t * err_pos, uint16_t * err_pos_len) {
+    uint8_t temp;
+    for(uint16_t i = 0; i < err_loc_len / 2; i++) {
+        temp = error_loc[i];
+        error_loc[i] = error_loc[err_loc_len - i - 1];
+        error_loc[err_loc_len - i - 1] = temp;
+    }
+    
+    *err_pos_len = 0;
+    for (uint16_t i = 0; i < msg_len; i++) {
+        uint8_t res = gf_poly_eval(error_loc, err_loc_len, gf_pow(2, i));
+        if (res == 0) {
+            err_pos[(*err_pos_len)++] = msg_len - 1 - i;
+        }
+    }
+    
+    uint16_t errors_count = err_loc_len - 1;
+    
+    return (*err_pos_len == errors_count);
 }

@@ -59,5 +59,13 @@ int main(int argc, const char * argv[]) {
     printf("error_locator:\n");
     utils_print_array_8(err_loc, err_loc_len);
     
+    uint16_t err_pos_len = msg_out_len;
+    uint8_t err_pos[err_loc_len];
+    memset(err_pos, 0, sizeof(err_pos));
+    rs_find_errors(err_loc, err_loc_len, msg_out_len, err_pos, &err_pos_len);
+    
+    printf("err_pos:\n");
+    utils_print_array_8(err_pos, err_pos_len);
+    
     return 0;
 }
