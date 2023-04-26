@@ -72,3 +72,12 @@ uint8_t utils_max_array_8(uint8_t * array, uint8_t len) {
     
     return max;
 }
+
+void utils_array_reverse(uint8_t * array, uint16_t len) {
+    uint8_t temp;
+    for(uint16_t i = 0; i < len / 2; i++) {
+        temp = array[i];
+        array[i] = array[len - i - 1];
+        array[len - i - 1] = temp;
+    }
+}

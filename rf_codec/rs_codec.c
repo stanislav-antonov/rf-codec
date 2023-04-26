@@ -139,12 +139,7 @@ bool rs_find_error_locator(uint8_t nsym, uint8_t * synd, uint8_t synd_len, uint8
 }
 
 bool rs_find_errors(uint8_t * error_loc, uint16_t err_loc_len, uint16_t msg_len, uint8_t * err_pos, uint16_t * err_pos_len) {
-    uint8_t temp;
-    for(uint16_t i = 0; i < err_loc_len / 2; i++) {
-        temp = error_loc[i];
-        error_loc[i] = error_loc[err_loc_len - i - 1];
-        error_loc[err_loc_len - i - 1] = temp;
-    }
+    utils_array_reverse(error_loc, err_loc_len);
     
     *err_pos_len = 0;
     for (uint16_t i = 0; i < msg_len; i++) {
@@ -157,4 +152,148 @@ bool rs_find_errors(uint8_t * error_loc, uint16_t err_loc_len, uint16_t msg_len,
     uint16_t errors_count = err_loc_len - 1;
     
     return (*err_pos_len == errors_count);
+}
+
+void rs_forney_syndromes(uint8_t * synd, uint8_t synd_len,
+                         uint8_t * err_pos, uint16_t err_pos_len, uint16_t msg_len,
+                         uint8_t * f_synd, uint16_t * f_synd_len) {
+    
+    uint8_t erase_pos[err_pos_len];
+    memset(erase_pos, 0, sizeof(erase_pos));
+    for (uint16_t i = 0; i < err_pos_len; i++) {
+        uint8_t p = err_pos[i];
+        erase_pos[i] = msg_len - 1 - p;
+    }
+    
+    memcpy(f_synd, synd + 1, synd_len);
+    
+    for (uint8_t i = 0; i < err_pos_len; i++) {
+        uint8_t x = gf_pow(2, erase_pos[i]);
+        for (uint8_t j = 0; j < synd_len - 1; j++) {
+            f_synd[j] = gf_mult(f_synd[j], x) ^ f_synd[j + 1];
+        }
+    }
+}
+
+void rs_find_errata_locator(uint8_t * err_pos, uint8_t err_pos_len, uint8_t * err_loc, uint16_t * err_loc_len) {
+    err_loc[0] = 1;
+    *err_loc_len = 1;
+    
+    uint8_t p[] = { 1 };
+    uint8_t q[] = { 0, 0 };
+
+    uint16_t t_len = 2;
+    uint8_t t[t_len];
+    
+    uint16_t err_loc_result_len = err_pos_len * 2;
+    uint8_t err_loc_result[err_loc_result_len];
+    
+    for (uint8_t i = 0; i < err_pos_len; i++) {
+        q[0] = gf_pow(2, i);
+        q[1] = 0;
+        
+        memset(t, 0, sizeof(t));
+        gf_poly_add(p, 1, q, 2, t, &t_len);
+        
+        memset(err_loc_result, 0, sizeof(err_loc_result));
+        gf_poly_mult(err_loc, *err_loc_len, t, t_len, err_loc_result, &err_loc_result_len);
+        
+        memcpy(err_loc, err_loc_result, err_loc_result_len);
+    }
+}
+
+void rs_find_error_evaluator(uint8_t * synd, uint8_t synd_len,
+                             uint8_t * err_loc, uint16_t err_loc_len, uint8_t nsym,
+                             uint8_t * err_eval, uint16_t * err_eval_len) {
+    
+    uint16_t p_len = synd_len + err_loc_len + 1;
+    uint8_t p[p_len];
+    memset(p, 0, sizeof(p));
+    gf_poly_mult(synd, synd_len, err_loc, err_loc_len, p, &p_len);
+    
+    uint16_t q_len = nsym + 2;
+    uint8_t q[q_len];
+    memset(q, 0, sizeof(q));
+    q[0] = 1;
+    
+    gf_poly_div(p, p_len, q, q_len, NULL, NULL, err_eval, err_eval_len);
+}
+
+bool rs_correct_errata(uint8_t * msg, uint16_t msg_len,
+                       uint8_t * synd, uint synd_len,
+                       uint8_t * err_pos, uint16_t err_pos_len) {
+    
+    uint8_t coef_pos[err_pos_len];
+    memset(coef_pos, 0, sizeof(coef_pos));
+    for (uint16_t i = 0; i < err_pos_len; i++) {
+        uint8_t p = err_pos[i];
+        coef_pos[i] = msg_len - 1 - p;
+    }
+    
+    uint16_t err_loc_len = err_pos_len * 2;
+    uint8_t err_loc[err_loc_len];
+    memset(err_loc, 0, sizeof(err_loc));
+    rs_find_errata_locator(coef_pos, err_pos_len, err_loc, &err_loc_len);
+    
+    utils_array_reverse(synd, synd_len);
+    
+    uint16_t nsym = err_loc_len - 1;
+    uint16_t err_eval_len = nsym + 1;
+    uint8_t err_eval[err_eval_len];
+    memset(err_eval, 0, sizeof(err_eval));
+    rs_find_error_evaluator(synd, synd_len, err_loc, err_loc_len, nsym,
+                            err_eval, &err_eval_len);
+    
+    // utils_array_reverse(err_eval, err_eval_len);
+    
+    uint8_t x[err_pos_len];
+    memset(x, 0, sizeof(x));
+    for (uint16_t i = 0; i < err_pos_len; i++) {
+        int8_t l = 255 - coef_pos[i];
+        x[i] = gf_pow(2, -l);
+    }
+    
+    uint8_t e[msg_len];
+    memset(e, 0, sizeof(e));
+    
+    uint16_t x_len = err_pos_len;
+    uint8_t err_loc_prime_tmp[x_len];
+    
+    for (uint16_t i = 0; i < x_len; i++) {
+        uint8_t xi = x[i];
+        uint8_t xi_inv = gf_inverse(xi);
+        
+        uint16_t k = 0;
+        memset(err_loc_prime_tmp, 0, sizeof(err_loc_prime_tmp));
+        for (uint16_t j = 0; j < x_len; j++) {
+            if (j != i) {
+                uint8_t val = gf_sub(1, gf_mult(xi_inv, x[j]));
+                err_loc_prime_tmp[k++] = val;
+            }
+        }
+        
+        uint8_t err_loc_prime = 1;
+        for (uint16_t i = 0; i < x_len; i++) {
+            err_loc_prime = gf_mult(err_loc_prime, err_loc_prime_tmp[i]);
+        }
+        
+        uint8_t y = gf_poly_eval(err_eval, err_eval_len, xi_inv);
+        y = gf_mult(gf_pow(xi, 1), y);
+        
+        if (err_loc_prime == 0) {
+            return false;
+        }
+        
+        uint8_t magnitude = gf_div(y, err_loc_prime);
+        e[err_pos[i]] = magnitude;
+    }
+    
+    uint16_t msg_corrected_len = msg_len;
+    uint8_t msg_corrected[msg_corrected_len];
+    memset(msg_corrected, 0, sizeof(msg_corrected));
+    
+    gf_poly_add(msg, msg_len, e, msg_len, msg_corrected, &msg_corrected_len);
+    memcpy(msg, msg_corrected, msg_corrected_len);
+    
+    return true;
 }
