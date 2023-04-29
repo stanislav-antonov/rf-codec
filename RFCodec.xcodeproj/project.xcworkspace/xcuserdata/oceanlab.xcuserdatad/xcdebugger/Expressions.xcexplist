@@ -3,10 +3,13 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "main:main.c">
+         contextName = "hamming_encode:hamming_codec.c">
       </ContextState>
       <ContextState
-         contextName = "hamming_encode:hamming_codec.c">
+         contextName = "rs_encode:rs_codec.c">
+      </ContextState>
+      <ContextState
+         contextName = "main:main.c">
       </ContextState>
       <ContextState
          contextName = "rs_find_error_locator:rs_codec.c">
@@ -23,13 +26,53 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "rs_correct_msg:rs_codec.c">
+         <PersistentStrings>
+            <PersistentString
+               value = "(uint8_t(&amp;)[26])err_pos">
+            </PersistentString>
+            <PersistentString
+               value = "(uint8_t(&amp;)[11])synd">
+            </PersistentString>
+            <PersistentString
+               value = "(uint8_t(&amp;)[26])msg_corrected">
+            </PersistentString>
+            <PersistentString
+               value = "(uint8_t(&amp;)[4])err_loc">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "rs_generator_poly:rs_codec.c">
       </ContextState>
       <ContextState
          contextName = "gf_poly_div:gf.c">
       </ContextState>
       <ContextState
-         contextName = "rs_encode:rs_codec.c">
+         contextName = "rs_correct_errata:rs_codec.c">
+         <PersistentStrings>
+            <PersistentString
+               value = "(uint8_t(&amp;)[10])err_loc">
+            </PersistentString>
+            <PersistentString
+               value = "(uint8_t(&amp;)[3])x">
+            </PersistentString>
+            <PersistentString
+               value = "(uint8_t(&amp;)[3])err_loc_prime_tmp">
+            </PersistentString>
+            <PersistentString
+               value = "(uint8_t(&amp;)[3])coef_pos">
+            </PersistentString>
+            <PersistentString
+               value = "(uint8_t(&amp;)[4])err_eval">
+            </PersistentString>
+            <PersistentString
+               value = "(uint8_t(&amp;)[16])e">
+            </PersistentString>
+            <PersistentString
+               value = "(uint8_t(&amp;)[16])msg_corrected">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>

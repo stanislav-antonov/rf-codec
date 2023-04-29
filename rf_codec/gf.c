@@ -47,7 +47,7 @@ uint8_t gf_div(uint8_t x, uint8_t y) {
     return gf_exp[ (gf_log[x] + 255 - gf_log[y]) % 255 ];
 }
 
-uint8_t gf_pow(uint8_t x, int8_t power) {
+uint8_t gf_pow(uint8_t x, uint8_t power) {
     return gf_exp[ (gf_log[x] * power) % 255 ];
 }
 

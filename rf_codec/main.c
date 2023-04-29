@@ -32,18 +32,22 @@ int main(int argc, const char * argv[]) {
     rs_init();
     rs_encode(nsym, msg_in, msg_in_len, msg_out, &msg_out_len);
     
-    printf("msg_out:\n");
+    printf("msg_out encoded:\n");
     utils_print_array_8(msg_out, msg_out_len);
     
-    uint8_t synd_len = nsym + 1;
-    uint8_t synd[synd_len];
-    memset(synd, 0, sizeof(synd));
+    msg_out[1] = 44;
+    msg_out[2] = 55;
+    msg_out[3] = 66;
     
-    msg_out[2] = 8;
-    msg_out[5] = 6;
-    msg_out[10] = 18;
+    printf("msg_out corrupted:\n");
+    utils_print_array_8(msg_out, msg_out_len);
     
-    rs_calc_syndromes(msg_out, msg_out_len, nsym, synd, &synd_len);
+    /*
+     uint8_t synd_len = nsym + 1;
+     uint8_t synd[synd_len];
+     memset(synd, 0, sizeof(synd));
+     
+     rs_calc_syndromes(msg_out, msg_out_len, nsym, synd, &synd_len);
     
     printf("syndromes:\n");
     utils_print_array_8(synd, synd_len);
@@ -64,8 +68,14 @@ int main(int argc, const char * argv[]) {
     memset(err_pos, 0, sizeof(err_pos));
     rs_find_errors(err_loc, err_loc_len, msg_out_len, err_pos, &err_pos_len);
     
-    printf("err_pos:\n");
-    utils_print_array_8(err_pos, err_pos_len);
+     printf("err_pos:\n");
+     utils_print_array_8(err_pos, err_pos_len);
+     */
+     
+    rs_correct_msg(msg_out, msg_out_len, 10);
+    
+    printf("msg_out corrected:\n");
+    utils_print_array_8(msg_out, msg_out_len);
     
     return 0;
 }
