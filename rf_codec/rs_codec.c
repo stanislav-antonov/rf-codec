@@ -4,11 +4,110 @@
 
 #include "rs_codec.h"
 
+static void rs_generator_poly(uint8_t nsym, uint8_t * g, uint16_t * len_g);
+static void rs_calc_syndromes(uint8_t * msg, uint16_t msg_len, uint8_t nsym, uint8_t * synd, uint8_t * synd_len);
+static bool rs_find_error_locator(uint8_t nsym, uint8_t * synd, uint8_t synd_len, uint8_t * err_loc, uint16_t * err_loc_len);
+static bool rs_find_errors(uint8_t * error_loc, uint16_t err_loc_len, uint16_t msg_len, uint8_t * err_pos, uint16_t * err_pos_len);
+static void rs_forney_syndromes(uint8_t * synd, uint8_t synd_len,
+                                uint8_t * err_pos, uint16_t err_pos_len, uint16_t msg_len,
+                                uint8_t * f_synd, uint16_t * f_synd_len);
+static void rs_find_errata_locator(uint8_t * err_pos, uint8_t err_pos_len, uint8_t * err_loc, uint16_t * err_loc_len);
+static void rs_find_error_evaluator(uint8_t * synd, uint8_t synd_len,
+                                    uint8_t * err_loc, uint16_t err_loc_len, uint8_t nsym,
+                                    uint8_t * err_eval, uint16_t * err_eval_len);
+static bool rs_correct_errata(uint8_t * msg, uint16_t msg_len,
+                              uint8_t * synd, uint synd_len,
+                              uint8_t * err_pos, uint16_t err_pos_len);
+
 void rs_init() {
     gf_init();
 }
 
-void rs_generator_poly(uint8_t nsym, uint8_t * g, uint16_t * len_g) {
+void rs_encode(uint8_t nsym, uint8_t * msg_in, uint16_t msg_in_len, uint8_t * msg_out, uint16_t * msg_out_len) {
+    uint16_t len_g = 2 * nsym;
+    uint8_t g[len_g];
+    memset(g, 0, sizeof(g));
+    rs_generator_poly(nsym, g, &len_g);
+    
+    uint16_t msg_in_extended_len = msg_in_len + len_g - 1;
+    uint8_t msg_in_extended[msg_in_extended_len];
+    memset(msg_in_extended, 0, sizeof(msg_in_extended));
+    memcpy(msg_in_extended, msg_in, sizeof(uint8_t) * msg_in_len);
+    
+    uint16_t r_len;
+    uint8_t r[len_g];
+    memset(r, 0, sizeof(r));
+    
+    gf_poly_div(msg_in_extended, msg_in_extended_len, g, len_g, NULL, NULL, r, &r_len);
+    
+    memcpy(msg_out, msg_in, msg_in_len * sizeof(uint8_t));
+    memcpy(msg_out + msg_in_len, r, r_len * sizeof(uint8_t));
+    *msg_out_len = msg_in_len + r_len;
+}
+
+bool rs_message_is_corrupted(uint8_t * msg, uint16_t msg_len, uint8_t nsym) {
+    uint8_t synd_len = nsym + 1;
+    uint8_t synd[synd_len];
+    memset(synd, 0, sizeof(synd));
+    
+    rs_calc_syndromes(msg, msg_len, nsym, synd, &synd_len);
+    uint8_t res = utils_max_array_8(synd, synd_len);
+    
+    return res > 0;
+}
+
+bool rs_correct_msg(uint8_t * msg, uint16_t * msg_len, uint8_t nsym) {
+    if (*msg_len > 255) {
+        return false;
+    }
+    
+    uint8_t msg_corrected[*msg_len];
+    memset(msg_corrected, 0, sizeof(msg_corrected));
+    memcpy(msg_corrected, msg, *msg_len);
+    
+    uint8_t synd_len = nsym + 1;
+    uint8_t synd[synd_len];
+    memset(synd, 0, sizeof(synd));
+    rs_calc_syndromes(msg_corrected, *msg_len, nsym, synd, &synd_len);
+    
+    uint8_t res = utils_max_array_8(synd, synd_len);
+    if (res == 0) {
+        memset(msg, 0, *msg_len);
+        memcpy(msg, msg_corrected, *msg_len - nsym);
+        return true;
+    }
+    
+    uint16_t err_loc_len = *msg_len;
+    uint8_t err_loc[err_loc_len];
+    memset(err_loc, 0, sizeof(err_loc));
+    rs_find_error_locator(nsym, synd, synd_len, err_loc, &err_loc_len);
+    
+    uint16_t err_pos_len = *msg_len;
+    uint8_t err_pos[err_pos_len];
+    memset(err_pos, 0, sizeof(err_pos));
+    rs_find_errors(err_loc, err_loc_len, *msg_len, err_pos, &err_pos_len);
+    
+    rs_correct_errata(msg_corrected, *msg_len, synd, synd_len, err_pos, err_pos_len);
+    
+    memset(synd, 0, sizeof(synd));
+    rs_calc_syndromes(msg_corrected, *msg_len, nsym, synd, &synd_len);
+    res = utils_max_array_8(synd, synd_len);
+    if (res > 0) {
+        return false;
+    }
+    
+    memset(msg, 0, *msg_len);
+    
+    *msg_len = *msg_len - nsym;
+    memcpy(msg, msg_corrected, *msg_len);
+    
+    return true;
+}
+
+
+/* private functions */
+
+static void rs_generator_poly(uint8_t nsym, uint8_t * g, uint16_t * len_g) {
     g[0] = 1;
     *len_g = 1;
     
@@ -30,31 +129,8 @@ void rs_generator_poly(uint8_t nsym, uint8_t * g, uint16_t * len_g) {
     }
 }
 
-void rs_encode(uint8_t nsym, uint8_t * msg_in, uint16_t msg_in_len, uint8_t * msg_out, uint16_t * msg_out_len) {
-    
-    uint16_t len_g = 2 * nsym;
-    uint8_t g[len_g];
-    memset(g, 0, sizeof(g));
-    rs_generator_poly(nsym, g, &len_g);
-    
-    uint16_t msg_in_extended_len = msg_in_len + len_g - 1;
-    uint8_t msg_in_extended[msg_in_extended_len];
-    memset(msg_in_extended, 0, sizeof(msg_in_extended));
-    memcpy(msg_in_extended, msg_in, sizeof(uint8_t) * msg_in_len);
-    
-    uint16_t r_len;
-    uint8_t r[len_g];
-    memset(r, 0, sizeof(r));
-    
-    gf_poly_div(msg_in_extended, msg_in_extended_len, g, len_g, NULL, NULL, r, &r_len);
-
-    memcpy(msg_out, msg_in, msg_in_len * sizeof(uint8_t));
-    memcpy(msg_out + msg_in_len, r, r_len * sizeof(uint8_t));
-    *msg_out_len = msg_in_len + r_len;
-}
-
 // synd_len = nsym + 1
-void rs_calc_syndromes(uint8_t * msg, uint16_t msg_len, uint8_t nsym, uint8_t * synd, uint8_t * synd_len) {
+static void rs_calc_syndromes(uint8_t * msg, uint16_t msg_len, uint8_t nsym, uint8_t * synd, uint8_t * synd_len) {
     synd[0] = 0;
     for (uint8_t i = 0; i < nsym; i++) {
         synd[i + 1] = gf_poly_eval(msg, msg_len, gf_pow(2, i));
@@ -63,18 +139,7 @@ void rs_calc_syndromes(uint8_t * msg, uint16_t msg_len, uint8_t nsym, uint8_t * 
     *synd_len = nsym + 1;
 }
 
-bool rs_message_is_corrupted(uint8_t * msg, uint16_t msg_len, uint8_t nsym) {
-    uint8_t synd_len = nsym + 1;
-    uint8_t synd[synd_len];
-    memset(synd, 0, sizeof(synd));
-    
-    rs_calc_syndromes(msg, msg_len, nsym, synd, &synd_len);
-    uint8_t res = utils_max_array_8(synd, synd_len);
-    
-    return res > 0;
-}
-
-bool rs_find_error_locator(uint8_t nsym, uint8_t * synd, uint8_t synd_len, uint8_t * err_loc, uint16_t * err_loc_len) {
+static bool rs_find_error_locator(uint8_t nsym, uint8_t * synd, uint8_t synd_len, uint8_t * err_loc, uint16_t * err_loc_len) {
     
     err_loc[0] = 1; // errors locator polynomial
     *err_loc_len = 1;
@@ -138,7 +203,7 @@ bool rs_find_error_locator(uint8_t nsym, uint8_t * synd, uint8_t synd_len, uint8
     return !(errors_count * 2 > nsym);
 }
 
-bool rs_find_errors(uint8_t * error_loc, uint16_t err_loc_len, uint16_t msg_len, uint8_t * err_pos, uint16_t * err_pos_len) {
+static bool rs_find_errors(uint8_t * error_loc, uint16_t err_loc_len, uint16_t msg_len, uint8_t * err_pos, uint16_t * err_pos_len) {
     uint8_t error_loc_copy[err_loc_len];
     memset(error_loc_copy, 0, sizeof(error_loc_copy));
     memcpy(error_loc_copy, error_loc, err_loc_len);
@@ -157,29 +222,7 @@ bool rs_find_errors(uint8_t * error_loc, uint16_t err_loc_len, uint16_t msg_len,
     return (*err_pos_len == errors_count);
 }
 
-void rs_forney_syndromes(uint8_t * synd, uint8_t synd_len,
-                         uint8_t * err_pos, uint16_t err_pos_len, uint16_t msg_len,
-                         uint8_t * f_synd, uint16_t * f_synd_len) {
-    
-    uint8_t erase_pos[err_pos_len];
-    memset(erase_pos, 0, sizeof(erase_pos));
-    for (uint16_t i = 0; i < err_pos_len; i++) {
-        uint8_t p = err_pos[i];
-        erase_pos[i] = msg_len - 1 - p;
-    }
-    
-    memcpy(f_synd, synd + 1, synd_len);
-    *f_synd_len = synd_len;
-    
-    for (uint16_t i = 0; i < err_pos_len; i++) {
-        uint8_t x = gf_pow(2, erase_pos[i]);
-        for (uint16_t j = 0; j < synd_len - 1; j++) {
-            f_synd[j] = gf_mult(f_synd[j], x) ^ f_synd[j + 1];
-        }
-    }
-}
-
-void rs_find_errata_locator(uint8_t * err_pos, uint8_t err_pos_len, uint8_t * err_loc, uint16_t * err_loc_len) {
+static void rs_find_errata_locator(uint8_t * err_pos, uint8_t err_pos_len, uint8_t * err_loc, uint16_t * err_loc_len) {
     err_loc[0] = 1;
     *err_loc_len = 1;
     
@@ -207,7 +250,7 @@ void rs_find_errata_locator(uint8_t * err_pos, uint8_t err_pos_len, uint8_t * er
     }
 }
 
-void rs_find_error_evaluator(uint8_t * synd, uint8_t synd_len,
+static void rs_find_error_evaluator(uint8_t * synd, uint8_t synd_len,
                              uint8_t * err_loc, uint16_t err_loc_len, uint8_t nsym,
                              uint8_t * err_eval, uint16_t * err_eval_len) {
     
@@ -224,7 +267,7 @@ void rs_find_error_evaluator(uint8_t * synd, uint8_t synd_len,
     gf_poly_div(p, p_len, q, q_len, NULL, NULL, err_eval, err_eval_len);
 }
 
-bool rs_correct_errata(uint8_t * msg, uint16_t msg_len,
+static bool rs_correct_errata(uint8_t * msg, uint16_t msg_len,
                        uint8_t * synd, uint synd_len,
                        uint8_t * err_pos, uint16_t err_pos_len) {
     
@@ -303,50 +346,24 @@ bool rs_correct_errata(uint8_t * msg, uint16_t msg_len,
     return true;
 }
 
-bool rs_correct_msg(uint8_t * msg, uint16_t * msg_len, uint8_t nsym) {
-    if (*msg_len > 255) {
-        return false;
+static void rs_forney_syndromes(uint8_t * synd, uint8_t synd_len,
+                                uint8_t * err_pos, uint16_t err_pos_len, uint16_t msg_len,
+                                uint8_t * f_synd, uint16_t * f_synd_len) {
+    
+    uint8_t erase_pos[err_pos_len];
+    memset(erase_pos, 0, sizeof(erase_pos));
+    for (uint16_t i = 0; i < err_pos_len; i++) {
+        uint8_t p = err_pos[i];
+        erase_pos[i] = msg_len - 1 - p;
     }
     
-    uint8_t msg_corrected[*msg_len];
-    memset(msg_corrected, 0, sizeof(msg_corrected));
-    memcpy(msg_corrected, msg, *msg_len);
+    memcpy(f_synd, synd + 1, synd_len);
+    *f_synd_len = synd_len;
     
-    uint8_t synd_len = nsym + 1;
-    uint8_t synd[synd_len];
-    memset(synd, 0, sizeof(synd));
-    rs_calc_syndromes(msg_corrected, *msg_len, nsym, synd, &synd_len);
-    
-    uint8_t res = utils_max_array_8(synd, synd_len);
-    if (res == 0) {
-        memset(msg, 0, *msg_len);
-        memcpy(msg, msg_corrected, *msg_len - nsym);
-        return true;
+    for (uint16_t i = 0; i < err_pos_len; i++) {
+        uint8_t x = gf_pow(2, erase_pos[i]);
+        for (uint16_t j = 0; j < synd_len - 1; j++) {
+            f_synd[j] = gf_mult(f_synd[j], x) ^ f_synd[j + 1];
+        }
     }
-    
-    uint16_t err_loc_len = *msg_len;
-    uint8_t err_loc[err_loc_len];
-    memset(err_loc, 0, sizeof(err_loc));
-    rs_find_error_locator(nsym, synd, synd_len, err_loc, &err_loc_len);
-    
-    uint16_t err_pos_len = *msg_len;
-    uint8_t err_pos[err_pos_len];
-    memset(err_pos, 0, sizeof(err_pos));
-    rs_find_errors(err_loc, err_loc_len, *msg_len, err_pos, &err_pos_len);
-    
-    rs_correct_errata(msg_corrected, *msg_len, synd, synd_len, err_pos, err_pos_len);
-    
-    memset(synd, 0, sizeof(synd));
-    rs_calc_syndromes(msg_corrected, *msg_len, nsym, synd, &synd_len);
-    res = utils_max_array_8(synd, synd_len);
-    if (res > 0) {
-        return false;
-    }
-    
-    memset(msg, 0, *msg_len);
-    
-    *msg_len = *msg_len - nsym;
-    memcpy(msg, msg_corrected, *msg_len);
-    
-    return true;
 }
