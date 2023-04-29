@@ -305,48 +305,50 @@ bool rs_correct_errata(uint8_t * msg, uint16_t msg_len,
     return true;
 }
 
-bool rs_correct_msg(uint8_t * msg, uint16_t msg_len, uint8_t nsym) {
-    if (msg_len > 255) {
+bool rs_correct_msg(uint8_t * msg, uint16_t * msg_len, uint8_t nsym) {
+    if (*msg_len > 255) {
         return false;
     }
     
-    uint8_t msg_corrected[msg_len];
+    uint8_t msg_corrected[*msg_len];
     memset(msg_corrected, 0, sizeof(msg_corrected));
-    memcpy(msg_corrected, msg, msg_len);
+    memcpy(msg_corrected, msg, *msg_len);
     
     uint8_t synd_len = nsym + 1;
     uint8_t synd[synd_len];
     memset(synd, 0, sizeof(synd));
-    rs_calc_syndromes(msg_corrected, msg_len, nsym, synd, &synd_len);
+    rs_calc_syndromes(msg_corrected, *msg_len, nsym, synd, &synd_len);
     
     uint8_t res = utils_max_array_8(synd, synd_len);
     if (res == 0) {
-        memset(msg, 0, msg_len);
-        memcpy(msg, msg_corrected, msg_len - nsym);
+        memset(msg, 0, *msg_len);
+        memcpy(msg, msg_corrected, *msg_len - nsym);
         return true;
     }
     
-    uint16_t err_loc_len = msg_len;
+    uint16_t err_loc_len = *msg_len;
     uint8_t err_loc[err_loc_len];
     memset(err_loc, 0, sizeof(err_loc));
     rs_find_error_locator(nsym, synd, synd_len, err_loc, &err_loc_len);
     
-    uint16_t err_pos_len = msg_len;
+    uint16_t err_pos_len = *msg_len;
     uint8_t err_pos[err_pos_len];
     memset(err_pos, 0, sizeof(err_pos));
-    rs_find_errors(err_loc, err_loc_len, msg_len, err_pos, &err_pos_len);
+    rs_find_errors(err_loc, err_loc_len, *msg_len, err_pos, &err_pos_len);
     
-    rs_correct_errata(msg_corrected, msg_len, synd, synd_len, err_pos, err_pos_len);
+    rs_correct_errata(msg_corrected, *msg_len, synd, synd_len, err_pos, err_pos_len);
     
     memset(synd, 0, sizeof(synd));
-    rs_calc_syndromes(msg_corrected, msg_len, nsym, synd, &synd_len);
+    rs_calc_syndromes(msg_corrected, *msg_len, nsym, synd, &synd_len);
     res = utils_max_array_8(synd, synd_len);
     if (res > 0) {
         return false;
     }
     
-    memset(msg, 0, msg_len);
-    memcpy(msg, msg_corrected, msg_len - nsym);
+    memset(msg, 0, *msg_len);
+    
+    *msg_len = *msg_len - nsym;
+    memcpy(msg, msg_corrected, *msg_len);
     
     return true;
 }

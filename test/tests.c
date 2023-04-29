@@ -81,16 +81,16 @@ void reed_solomon_encoding_test() {
     uint8_t msg_out[msg_out_len_expected];
     memset(msg_out, 0, sizeof(msg_out));
     
-    uint8_t msg_out_expected[] = {0x40, 0xd2, 0x75, 0x47, 0x76, 0x17, 0x32, 0x06, 0x27, 0x26, 0x96, 0xc6, 0xc6, 0x96, 0x70, 0xec, 0xbc, 0x2a, 0x90, 0x13, 0x6b, 0xaf, 0xef, 0xfd, 0x4b, 0xe0 };
-    
     uint16_t msg_out_len;
     rs_encode(nsym, msg_in, msg_in_len, msg_out, &msg_out_len);
+    
+    uint8_t msg_out_expected[] = {0x40, 0xd2, 0x75, 0x47, 0x76, 0x17, 0x32, 0x06, 0x27, 0x26, 0x96, 0xc6, 0xc6, 0x96, 0x70, 0xec, 0xbc, 0x2a, 0x90, 0x13, 0x6b, 0xaf, 0xef, 0xfd, 0x4b, 0xe0 };
     
     TEST_ASSERT_EQUAL_UINT8(msg_out_len_expected, msg_out_len);
     TEST_ASSERT_EQUAL_UINT8_ARRAY_MESSAGE(msg_out_expected, msg_out, msg_out_len, NULL);
 }
 
-void reed_solomon_decoding_test() {
+void reed_solomon_synd_test() {
     uint8_t nsym = 10;
     uint16_t msg_len = 26;
     uint8_t msg[] = {0x40, 0xd2, 0x75, 0x47, 0x76, 0x17, 0x32, 0x06, 0x27, 0x26, 0x96, 0xc6, 0xc6, 0x96, 0x70, 0xec, 0xbc, 0x2a, 0x90, 0x13, 0x6b, 0xaf, 0xef, 0xfd, 0x4b, 0xe0 };
@@ -116,6 +116,30 @@ void reed_solomon_decoding_test() {
     TEST_ASSERT_EQUAL_UINT8_ARRAY_MESSAGE(corrupted_msg_synd, synd, synd_len, NULL);
 }
 
+void reed_solomon_decoding_test() {
+    uint16_t msg_original_len = 16;
+    uint8_t msg_original[] = {0x40, 0xd2, 0x75, 0x47, 0x76, 0x17, 0x32, 0x06, 0x27, 0x26, 0x96, 0xc6, 0xc6, 0x96, 0x70, 0xec};
+    
+    uint8_t nsym = 10;
+    uint16_t msg_encoded_len_expected = nsym + msg_original_len;
+    uint8_t msg_encoded[msg_encoded_len_expected];
+    memset(msg_encoded, 0, sizeof(msg_encoded));
+    
+    uint16_t msg_encoded_len;
+    rs_encode(nsym, msg_original, msg_original_len, msg_encoded, &msg_encoded_len);
+    
+    // Simulate message corruption
+    msg_encoded[1] = 0x44;
+    msg_encoded[2] = 0x55;
+    msg_encoded[3] = 0x66;
+    msg_encoded[7] = 0x88;
+    msg_encoded[19] = 0xcc;
+    
+    rs_correct_msg(msg_encoded, &msg_encoded_len, 10);
+    
+    TEST_ASSERT_EQUAL_UINT8(msg_original_len, msg_encoded_len);
+    TEST_ASSERT_EQUAL_UINT8_ARRAY_MESSAGE(msg_original, msg_encoded, msg_encoded_len, NULL);
+}
 
 int main(int argc, const char * argv[]) {
     UNITY_BEGIN();
@@ -129,6 +153,7 @@ int main(int argc, const char * argv[]) {
     
     galois_field_ops_test();
     reed_solomon_encoding_test();
+    reed_solomon_synd_test();
     reed_solomon_decoding_test();
     
     return UNITY_END();

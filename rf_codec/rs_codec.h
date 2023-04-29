@@ -24,6 +24,6 @@ bool rs_find_error_locator(uint8_t nsym, uint8_t * synd, uint8_t synd_len, uint8
 
 bool rs_find_errors(uint8_t * error_loc, uint16_t err_loc_len, uint16_t msg_len, uint8_t * err_pos, uint16_t * err_pos_len);
 
-bool rs_correct_msg(uint8_t * msg, uint16_t msg_len, uint8_t nsym);
+bool rs_correct_msg(uint8_t * msg, uint16_t * msg_len, uint8_t nsym);
 
 #endif /* rs_codec_h */
