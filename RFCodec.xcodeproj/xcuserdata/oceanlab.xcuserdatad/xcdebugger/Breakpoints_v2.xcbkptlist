@@ -1162,22 +1162,6 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "rf_codec/rs_codec.c"
-            timestampString = "704460112.288463"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "256"
-            endingLineNumber = "256"
-            landmarkName = "rs_correct_errata"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "rf_codec/rs_codec.c"
             timestampString = "704460112.288546"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"

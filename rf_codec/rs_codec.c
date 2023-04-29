@@ -251,8 +251,6 @@ bool rs_correct_errata(uint8_t * msg, uint16_t msg_len,
     rs_find_error_evaluator(synd_copy, synd_len, err_loc, err_loc_len, nsym,
                             err_eval, &err_eval_len);
     
-    // utils_array_reverse(err_eval, err_eval_len);
-    
     uint16_t x_len = err_pos_len;
     uint8_t x[x_len];
     memset(x, 0, sizeof(x));
